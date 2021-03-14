@@ -6,7 +6,7 @@ const ShamanNavbar = styled(Menubar)`
     background: white;
     font-family: poetry;
     & .p-menuitem-text {
-        color: #2F2E41 !important;
+        color: mediumpurple !important;
     };
     & .p-menubar-button {
         display: none !important;
