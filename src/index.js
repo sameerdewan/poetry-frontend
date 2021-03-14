@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import PrimeReact from 'primereact/api';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
+PrimeReact.ripple = true;
 
 ReactDOM.render(
   <React.StrictMode>
