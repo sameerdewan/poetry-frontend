@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import './styles/main.css';
 
 PrimeReact.ripple = true;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" height="25" width="25">
   <ellipse cx="251.62" cy="449.012" rx="229.037" ry="15.269" fill="#3f3d56" style=""/>
   <circle cx="239.744" cy="264.085" r="134.029" fill="#2f2e41" style=""/>
   <rect x="178.668" y="369.273" width="40.718" height="72.953" fill="#2f2e41" style=""/>

@@ -1,0 +1,3 @@
+.shaman-logo:before {
+    content: url('../images/shaman.svg') !important;
+}
