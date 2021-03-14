@@ -1,25 +1,47 @@
 import styled from '@emotion/styled';
 import { Menubar } from 'primereact/menubar';
+import { Button } from 'primereact/button';
 
 const ShamanNavbar = styled(Menubar)`
     background: white;
-    box-shadow: rgba(0, 0, 0, 0.0) 0px 6px 24px 0px, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
     font-family: poetry;
     & .p-menuitem-text {
-        color: black !important;
+        color: #2F2E41 !important;
+    };
+    & .p-menubar-button {
+        display: none !important;
+    };
+    & .margin-right-10px {
+        margin-right: 10px !important;
     };
 `;
 
-function Navbar() {
-    const items = [
-        {
-            label: 'poetry',
-            icon: 'pi pi-fw shaman-logo'
-        }
-      ];
+const ShamanLogo = () => {
     return (
-        <ShamanNavbar 
-            model={items}
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <a href="#" role="menuitem" class="p-menuitem-link" aria-haspopup="false">
+            <span class="p-menuitem-icon pi pi-fw shaman-logo"/>
+            <span class="p-menuitem-text">poetry</span>
+            <span class="p-ink"/>
+        </a>
+    );
+};
+
+const Menu = () => {
+    const buttons = [
+        { label: 'Product', className: 'p-button-text' },
+        { label: 'Pricing', className: 'p-button-text' },
+        { label: 'Sign in', className: 'p-button-outlined margin-right-10px' },
+        { label: 'Sign up', className: 'margin-right-10px' }
+    ];
+    return buttons.map(button => <Button {...button} />);
+};
+
+function Navbar() {
+    return (
+        <ShamanNavbar
+            start={<ShamanLogo />}
+            end={<Menu />}
         />
     );
 }

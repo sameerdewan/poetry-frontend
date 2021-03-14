@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PrimeReact from 'primereact/api';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
+import 'primereact/resources/themes/md-light-deeppurple/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './styles/main.css';

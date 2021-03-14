@@ -2,3 +2,7 @@
     padding: 0 !important;
     border-radius: 0 !important;
 }
+
+.p-menubar .p-menuitem-link:hover {
+    background: rgb(103,58,182, 0.04) !important;
+}
