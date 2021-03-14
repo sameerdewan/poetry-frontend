@@ -39,15 +39,15 @@ function Footer() {
             <div className='p-col-1'/>
             <div className='p-col-2'>
                 <Button label='Product'/><br/>
-                <Button className='p-button-sm' label='Basic' /><br/>
-                <Button className='p-button-sm' label='Professional' /><br/>
-                <Button className='p-button-sm' label='Small Business' /><br/>
-                <Button className='p-button-sm' label='Enterprise' /><br/>
+                <Button className='p-button-sm' label='Information' /><br/>
+                <Button className='p-button-sm' label='Pricing' /><br/>
             </div>
             <div className='p-col-3'>
                 <Button label='Resources'/><br/>
                 <Button className='p-button-sm' label='Getting Started' /><br/>
                 <Button className='p-button-sm' label='API Documentation' /><br/>
+                <Button className='p-button-sm' label='Live chat' /><br/>
+                <Button className='p-button-sm' label='Contact us' /><br/>
             </div>
             <div className='p-col-3'>
                 <Button label='Legal'/><br/>
