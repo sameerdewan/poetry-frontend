@@ -9,7 +9,7 @@ const SafeImage = styled.img`
 
 const BottomContainer = styled.section`
     background: var(--poetry_brand);
-    width: 101vw;
+    width: 102vw;
     padding: 25px 150px;
     position: relative;
     bottom: 0;

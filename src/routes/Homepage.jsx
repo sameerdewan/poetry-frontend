@@ -42,7 +42,7 @@ const ButtonsContainer = styled.section`
     padding-left: 30px;
 `;
 
-function Homepage() {
+function Homepage({ Footer }) {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
@@ -70,6 +70,7 @@ function Homepage() {
                 <div className='p-col-6'>
                     <FlipImage src={HomepageImage} />
                 </div>
+                <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );
