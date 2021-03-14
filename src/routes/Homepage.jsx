@@ -85,8 +85,8 @@ function Homepage() {
                         </SubHeaderText>
                     </HomePageHeaderGrid>
                     <ButtonsContainer>
-                        <Button label='Get started' className='margin-right-10px'/>
-                        <Button label='Documentation' className='p-button-outlined margin-right-10px' />
+                        <Button label='Get started' className='margin-right-10px' />
+                        <Button label='Documentation' className='p-button-outlined margin-right-10px' icon='pi pi-book' />
                     </ButtonsContainer>
                 </div>
                 <div className='p-col-6'>
