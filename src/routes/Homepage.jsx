@@ -13,6 +13,8 @@ const TopMarginGrid15px = styled.div`
 const FlipImage = styled.img`
     -webkit-transform: scaleX(-1) !important;
     transform: scaleX(-1) !important;
+    width: 50vw;
+    height: 50vw;
 `;
 
 const HomePageHeaderGrid = styled.div`

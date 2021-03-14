@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Homepage from './routes/Homepage';
 import Signup from './routes/Signup';
+import Signin from './routes/Signin';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <Route exact path='/' children={<Homepage Footer={Footer} />}/>
           <Route exact path='/sign-up' children={<Signup Footer={Footer} />}/>
+          <Route exact path='/sign-in' children={<Signin Footer={Footer} />} />
         </Switch>
     </React.Fragment>
   );

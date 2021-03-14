@@ -4,7 +4,7 @@ import React, {
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import RegisterImage from '../images/register.svg';
+import LoginImage from '../images/login.svg';
 
 const Image = styled.img`
     width: 50vw;
@@ -18,7 +18,7 @@ const TopMarginGrid15px = styled.div`
     };
 `;
 
-const SignupHeaderGrid = styled.div`
+const LoginHeaderGrid = styled.div`
     margin-top: 40px;
     padding: 30px;
 `;
@@ -38,23 +38,23 @@ const SubHeaderText = styled.section`
     width: 300px;
 `;
 
-function Signup({ Footer }) {
+function Signin({ Footer }) {
     const [loading, setLoading] = useState(false);
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
-                <div className='p-col-6'>
-                    <Image src={RegisterImage} />
+                <div className='p-col-5'>
+                    <Image src={LoginImage} />
                 </div>
-                <SignupHeaderGrid className='p-col-6'>
+                <div className='p-col-1' />
+                <LoginHeaderGrid className='p-col-6'>
                     <center>
                         <HeaderText>
-                            Sign up for an account
+                            Login to your account
                         </HeaderText>
                         <SubHeaderText>
                             <p>
-                                You're only a few clicks away from harnessing the power
-                                of the blockchain in your workflows
+                                Welcome back!
                             </p>
                         </SubHeaderText>
                         <div className="p-inputgroup">
@@ -71,30 +71,16 @@ function Signup({ Footer }) {
                             <InputText placeholder="Password" />
                         </div>
                         <br />
-                        <div className="p-inputgroup">
-                            <span className="p-inputgroup-addon">
-                                <i className="pi pi-check"></i>
-                            </span>
-                            <InputText placeholder="Confirm Password" />
-                        </div>
-                        <br />
-                        <div className="p-inputgroup">
-                            <span className="p-inputgroup-addon">
-                                <i className="pi pi-envelope"></i>
-                            </span>
-                            <InputText placeholder="Email" />
-                        </div>
-                        <br />
                         {
-                            !loading ? <Button label='Sign up' onClick={() => setLoading(true)} /> :
-                            <Button disabled label='Signing up...' icon='pi pi-spin pi-spinner' iconPos='right' />
+                            !loading ? <Button label='Login' onClick={() => setLoading(true)} /> :
+                            <Button disabled label='Logging in...' icon='pi pi-spin pi-spinner' iconPos='right' />
                         }
                     </center>
-                </SignupHeaderGrid>
+                </LoginHeaderGrid>
                 <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );
 }
 
-export default Signup;
+export default Signin;
