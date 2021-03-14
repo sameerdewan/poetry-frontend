@@ -8,6 +8,7 @@ const TopMarginGrid15px = styled.div`
     & .margin-right-10px {
         margin-right: 10px !important;
     };
+    height: 100vh;
 `;
 
 const FlipImage = styled.img`
