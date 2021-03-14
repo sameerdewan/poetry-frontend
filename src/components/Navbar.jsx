@@ -41,6 +41,7 @@ const Menu = () => {
     const buttons = [
         { label: 'Product', className: 'p-button-text' },
         { label: 'Pricing', className: 'p-button-text' },
+        { label: 'Documentation', className: 'p-button-text' },
         { label: 'Sign in', className: 'p-button-outlined margin-right-10px' },
         { label: 'Sign up', className: 'margin-right-10px' }
     ];

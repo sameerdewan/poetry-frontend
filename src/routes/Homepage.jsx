@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Button } from 'primereact/button';
+import React from 'react';
 import HomepageImage from '../images/homepage.svg';
 
 const TopMarginGrid15px = styled.div`
@@ -41,34 +42,45 @@ const ButtonsContainer = styled.section`
     padding-left: 30px;
 `;
 
+const BottomContainer = styled.section`
+    background: var(--poetry_brand);
+    height: 400px;
+    width: 101vw;
+`;
+
 function Homepage() {
     return (
-        <TopMarginGrid15px className='p-grid'>
-            <div className='p-col-6'>
-                <HomePageHeaderGrid>
-                    <HeaderText>
-                        Generate immutable, decentralized proofs for your files that are cross-blockchain resilient
-                    </HeaderText>
-                    <SubHeaderText>
-                        <ul>
-                            <li> No tokens required</li>
-                            <li>Persist proofs to multiple chains (Ethereum, Harmony, Polkadot)</li>
-                            <li>Create proofs for <i>numerous</i> file types</li>
-                            <li>Easy to use interface</li>
-                            <li>Seamless plug and play API integration</li>
-                            <li>Solutions available for all - from casual to enterprise</li>
-                        </ul>
-                    </SubHeaderText>
-                </HomePageHeaderGrid>
-                <ButtonsContainer>
-                    <Button label='Get started' className='margin-right-10px'/>
-                    <Button label='Documentation' className='p-button-outlined margin-right-10px' />
-                </ButtonsContainer>
-            </div>
-            <div className='p-col-6'>
-                <FlipImage src={HomepageImage} />
-            </div>
-        </TopMarginGrid15px>
+        <React.Fragment>
+            <TopMarginGrid15px className='p-grid'>
+                <div className='p-col-6'>
+                    <HomePageHeaderGrid>
+                        <HeaderText>
+                            Generate immutable, decentralized proofs for your files that are cross-blockchain resilient
+                        </HeaderText>
+                        <SubHeaderText>
+                            <ul>
+                                <li> No tokens required</li>
+                                <li>Persist proofs to multiple chains (Ethereum, Harmony, Polkadot)</li>
+                                <li>Create proofs for <i>numerous</i> file types</li>
+                                <li>Easy to use interface</li>
+                                <li>Seamless plug and play API integration</li>
+                                <li>Solutions available for all - from casual to enterprise</li>
+                            </ul>
+                        </SubHeaderText>
+                    </HomePageHeaderGrid>
+                    <ButtonsContainer>
+                        <Button label='Get started' className='margin-right-10px'/>
+                        <Button label='Documentation' className='p-button-outlined margin-right-10px' />
+                    </ButtonsContainer>
+                </div>
+                <div className='p-col-6'>
+                    <FlipImage src={HomepageImage} />
+                </div>
+            </TopMarginGrid15px>
+            <BottomContainer className="p-grid">
+
+            </BottomContainer>
+        </React.Fragment>
     );
 }
 
