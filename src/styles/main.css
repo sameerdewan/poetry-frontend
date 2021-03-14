@@ -1,4 +1,7 @@
 @import './_body.css';
-@import './_logo.css';
 @import './_fonts.css';
 @import './_Menubar.css';
+
+:root {
+    --poetry_brand: #673AB6;
+}

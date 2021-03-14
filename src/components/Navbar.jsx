@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
+import logo from '../images/poetry.svg';
 
 const ShamanNavbar = styled(Menubar)`
     background: white;
     font-family: poetry;
     & .p-menuitem-text {
-        color: #673AB6 !important;
+        color: var(--poetry_brand) !important;
         font-size: 24px;
-        margin-left: 14px;
+        margin-left: 5px;
     };
     & .p-menubar-button {
         display: none !important;
@@ -22,7 +23,11 @@ const ShamanLogo = () => {
     return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a href="#" role="menuitem" class="p-menuitem-link" aria-haspopup="false">
-            <span class="p-menuitem-icon pi pi-fw shaman-logo"/>
+            <img 
+                src={logo} 
+                height='40'
+                alt='poetry'
+            />
             <span class="p-menuitem-text">poetry</span>
             <span class="p-ink"/>
         </a>
