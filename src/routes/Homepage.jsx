@@ -59,9 +59,9 @@ function Homepage() {
                         </HeaderText>
                         <SubHeaderText>
                             <ul>
+                                <li>Proof-of-Existence (PoE) blockchain protocols</li>
                                 <li> No tokens required</li>
                                 <li>Persist proofs to multiple chains (Ethereum, Harmony, Polkadot)</li>
-                                <li>Create proofs for <i>numerous</i> file types</li>
                                 <li>Easy to use interface</li>
                                 <li>Seamless plug and play API integration</li>
                                 <li>Solutions available for all - from casual to enterprise</li>
