@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import HashLoader from "react-spinners/HashLoader";
 import RegisterImage from '../images/register.svg';
 import { register } from '../services/poetry-system';
 
@@ -42,7 +43,7 @@ const SubHeaderText = styled.section`
 `;
 
 function Signup() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     // const [confirmPassword, setConfirmPassword] = useState();
@@ -113,7 +114,15 @@ function Signup() {
                         <br />
                         {
                             !loading ? <Button label='Sign up' onClick={local_register} /> :
-                            <Button disabled label='Signing up...' icon='pi pi-spin pi-spinner' iconPos='right' />
+                            <React.Fragment>
+                                <Button disabled>
+                                    <HashLoader
+                                        color='#673AB6'
+                                        size={20}
+                                    /> &nbsp;
+                                    Signing up...
+                                </Button>
+                            </React.Fragment>
                         }
                     </center>
                 </SignupHeaderGrid>

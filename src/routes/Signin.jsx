@@ -4,6 +4,7 @@ import React, {
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import HashLoader from "react-spinners/HashLoader";
 import LoginImage from '../images/login.svg';
 
 const Image = styled.img`
@@ -39,7 +40,7 @@ const SubHeaderText = styled.section`
 `;
 
 function Signin() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     // const [username, setUsername] = useState();
     // const [password, setPassword] = useState();
 
@@ -77,7 +78,15 @@ function Signin() {
                         <br />
                         {
                             !loading ? <Button label='Login' onClick={() => setLoading(true)} /> :
-                            <Button disabled label='Logging in...' icon='pi pi-spin pi-spinner' iconPos='right' />
+                            <React.Fragment>
+                                <Button disabled>
+                                    <HashLoader
+                                        color='#673AB6'
+                                        size={20}
+                                    /> &nbsp;
+                                    Logging in...
+                                </Button>
+                            </React.Fragment>
                         }
                     </center>
                 </LoginHeaderGrid>
