@@ -28,11 +28,13 @@ const TopMarginGrid15px = styled.div`
         text-align: center;
         font-size: .8em;
     };
+    padding-bottom: 5vw;
+    padding-top: 5vw;
 `;
 
 const Img = styled.img`
-    height: 10em;
-    width: 10em;
+    height: 10vw;
+    width: 10vw;
 `;
 
 const Padder = styled.div`
@@ -67,7 +69,7 @@ const Header = ({ title, price, yearly }) => {
 
 const PriceColumn = ({ title, price, yearly, image, bullets = [] }) => {
     return (
-        <div className='p-col-3' width='25%' height="100%">
+        <div className='p-col-3' height="100%">
             <Card header={<Header title={title} price={price} yearly={yearly}/>} style={{ width: '100%', height: "100%" }}>
                 <div className='p-m-0' 
                     style={{ lineHeight: '1.5', textAlign: 'left', color: 'var(--poetry_brand)', fontFamily: 'poetry', height: '12em' }}
@@ -96,11 +98,11 @@ function Pricing() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid '>
-                {centerWrap(<Padder>
+                <Padder>
                     {
                         columns.map(column => <PriceColumn {...column} />)
                     }
-                </Padder>)}
+                </Padder>
             </TopMarginGrid15px>
         </React.Fragment>
     );

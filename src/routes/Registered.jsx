@@ -10,6 +10,7 @@ const Image = styled.img`
 
 const TopMarginGrid15px = styled.div`
     margin-top: 15px;
+    padding-top: 10vw;
     & .margin-right-10px {
         margin-right: 10px !important;
     };
@@ -17,7 +18,7 @@ const TopMarginGrid15px = styled.div`
     font-family: poetry;
     color: var(--poetry_brand);
     & h3 {
-        padding-bottom: 110px;
+        padding-bottom: 10vw;
     };
 `;
 
