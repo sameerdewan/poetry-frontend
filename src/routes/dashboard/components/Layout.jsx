@@ -82,6 +82,47 @@ const Container = styled.div`
     display: inline-flex;
 `;
 
+function Layout() {
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+        <React.Fragment>
+            <TopPanel>
+
+            </TopPanel>
+            <Container>
+                <SidePanel expanded={expanded}>
+                    <Accordion activeIndex={0}>
+                        <AccordionTab header='Files'>
+                            <Tree value={data} />
+                        </AccordionTab>
+                        <AccordionTab header='History'>
+
+                        </AccordionTab>
+                        <AccordionTab header='API'>
+
+                        </AccordionTab>
+                        <AccordionTab header='Subscription'>
+
+                        </AccordionTab>
+                        <AccordionTab header='Settings'>
+
+                        </AccordionTab>
+                    </Accordion>
+                </SidePanel>
+            </Container>
+            <BottomSidePanel expanded={expanded}>
+                        <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
+                    </BottomSidePanel>
+            <BottomPanel expanded={expanded}>
+
+            </BottomPanel>
+        </React.Fragment>
+    );
+}
+
+export default Layout;
+
 const data = [
     {
         "key": "0",
@@ -134,44 +175,3 @@ const data = [
         }]
     }
 ]
-
-function Layout() {
-    const [expanded, setExpanded] = useState(false);
-
-    return (
-        <React.Fragment>
-            <TopPanel>
-
-            </TopPanel>
-            <Container>
-                <SidePanel expanded={expanded}>
-                    <Accordion activeIndex={0}>
-                        <AccordionTab header='Files'>
-                            <Tree value={data} />
-                        </AccordionTab>
-                        <AccordionTab header='History'>
-
-                        </AccordionTab>
-                        <AccordionTab header='API'>
-
-                        </AccordionTab>
-                        <AccordionTab header='Subscription'>
-
-                        </AccordionTab>
-                        <AccordionTab header='Settings'>
-
-                        </AccordionTab>
-                    </Accordion>
-                </SidePanel>
-            </Container>
-            <BottomSidePanel expanded={expanded}>
-                        <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
-                    </BottomSidePanel>
-            <BottomPanel expanded={expanded}>
-
-            </BottomPanel>
-        </React.Fragment>
-    );
-}
-
-export default Layout;
