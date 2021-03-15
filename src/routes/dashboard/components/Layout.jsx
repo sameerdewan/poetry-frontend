@@ -5,6 +5,17 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Tree } from 'primereact/tree';
 
 const SidePanel = styled.section`
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+        width: 1px;
+    };
+    ::-webkit-scrollbar-track {
+        background: white;
+    };
+    ::-webkit-scrollbar-thumb {
+        background: var(--poetry_brand);
+        border: 1px solid var(--poetry_brand);
+    };
     height: calc(100vh - 100px);
     position: relative;
     width: ${props => props.expanded ? '400px' : '250px'};
@@ -37,7 +48,6 @@ const SidePanel = styled.section`
 
 const BottomSidePanel = styled.footer`
     position: absolute;
-    bottom: -50px;
     height: 50px;
     width: ${props => props.expanded ? '400px' : '250px'};
     transition: width .5s;
@@ -152,12 +162,11 @@ function Layout() {
 
                         </AccordionTab>
                     </Accordion>
-                    <BottomSidePanel expanded={expanded}>
-                        <Button icon='pi pi-angle-double-right' onClick={() => setExpanded(!expanded)} />
-                    </BottomSidePanel>
                 </SidePanel>
-
             </Container>
+            <BottomSidePanel expanded={expanded}>
+                        <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
+                    </BottomSidePanel>
             <BottomPanel expanded={expanded}>
 
             </BottomPanel>
