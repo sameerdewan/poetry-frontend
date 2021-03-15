@@ -130,9 +130,18 @@ function Layout() {
             </TopPanel>
             <Container>
                 <SidePanel>
-                    <Accordion>
+                    <Accordion activeIndex={0}>
                         <AccordionTab header='Files'>
                             <Tree value={data} />
+                        </AccordionTab>
+                        <AccordionTab header='History'>
+
+                        </AccordionTab>
+                        <AccordionTab header='API'>
+
+                        </AccordionTab>
+                        <AccordionTab header='Subscription'>
+
                         </AccordionTab>
                         <AccordionTab header='Settings'>
 
