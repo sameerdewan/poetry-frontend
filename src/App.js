@@ -9,22 +9,24 @@ import Signin from './routes/Signin';
 import Pricing from './routes/Pricing';
 import Registered from './routes/Registered';
 import Validated from './routes/Validated';
+import Dashboard from './routes/dashboard/Dashboard';
 
 function App() {
-  const showFooter = useLocation().pathname !== '/dashboard';
+  const isPublicRoute = useLocation().pathname !== '/dashboard';
   return (
     <React.Fragment>
       <Notifications>
-        <Navbar />
-          <Switch>
-            <Route exact path='/' children={<Homepage />}/>
-            <Route exact path='/sign-up' children={<Signup />}/>
-            <Route exact path='/sign-in' children={<Signin />} />
-            <Route exact path='/pricing' children={<Pricing />} />
-            <Route exact path='/registered' children={<Registered />} />
-            <Route exact path='/validated/:validationCode' children={<Validated />} />
-          </Switch>
-          {showFooter ? <Footer /> : <React.Fragment /> }
+        { isPublicRoute? <Navbar /> : <React.Fragment /> }
+        <Switch>
+          <Route exact path='/' children={<Homepage />}/>
+          <Route exact path='/sign-up' children={<Signup />}/>
+          <Route exact path='/sign-in' children={<Signin />} />
+          <Route exact path='/pricing' children={<Pricing />} />
+          <Route exact path='/registered' children={<Registered />} />
+          <Route exact path='/validated/:validationCode' children={<Validated />} />
+          <Route exact path='/dashboard' children={<Dashboard />} />
+        </Switch>
+        {isPublicRoute ? <Footer /> : <React.Fragment /> }
       </Notifications>
     </React.Fragment>
   );
