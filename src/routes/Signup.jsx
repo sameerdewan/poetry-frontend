@@ -10,8 +10,8 @@ import RegisterImage from '../images/register.svg';
 import { register } from '../services/poetry-system';
 
 const Image = styled.img`
-    width: 50vw;
-    height: 50vw;
+    width: 40vw;
+    height: 40vw;
 `;
 
 const TopMarginGrid15px = styled.div`
@@ -68,10 +68,11 @@ function Signup() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
-                <div className='p-col-6'>
+                <div className='p-col-1' />
+                <div className='p-col-5'>
                     <Image src={RegisterImage} />
                 </div>
-                <SignupHeaderGrid className='p-col-6'>
+                <SignupHeaderGrid className='p-col-5'>
                     <center>
                         <HeaderText>
                             Sign up for an account
@@ -116,6 +117,7 @@ function Signup() {
                         }
                     </center>
                 </SignupHeaderGrid>
+                <div className='p-col-1' />
             </TopMarginGrid15px>
         </React.Fragment>
     );
