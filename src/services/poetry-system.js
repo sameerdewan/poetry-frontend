@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.POETRY_SYSTEM_URL;
+const baseURL = process.env.REACT_APP_POETRY_SYSTEM_URL;
 
 export const login = async ({ username, password }) => {
     const response = await axios.post(`${baseURL}/api/login`, { username, password });

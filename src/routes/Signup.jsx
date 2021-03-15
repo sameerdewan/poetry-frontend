@@ -45,16 +45,18 @@ function Signup({ Footer }) {
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
+    // const [confirmPassword, setConfirmPassword] = useState();
     const [email, setEmail] = useState();
 
     const local_register = useCallback(
         async () => {
+            setLoading(true)
             try {
                 await register({ username, password, email });
             } catch (error) {
                 console.log(error);
             }
+            setLoading(false);
         },
         [email, password, username]
     );
@@ -80,14 +82,14 @@ function Signup({ Footer }) {
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
                             </span>
-                            <InputText placeholder="Username" />
+                            <InputText placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                         </div>
                         <br />
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-lock"></i>
                             </span>
-                            <InputText placeholder="Password" />
+                            <InputText placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <br />
                         <div className="p-inputgroup">
@@ -101,11 +103,11 @@ function Signup({ Footer }) {
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-envelope"></i>
                             </span>
-                            <InputText placeholder="Email" />
+                            <InputText placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                         <br />
                         {
-                            !loading ? <Button label='Sign up' onClick={() => setLoading(true)} /> :
+                            !loading ? <Button label='Sign up' onClick={local_register} /> :
                             <Button disabled label='Signing up...' icon='pi pi-spin pi-spinner' iconPos='right' />
                         }
                     </center>
