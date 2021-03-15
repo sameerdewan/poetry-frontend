@@ -1,6 +1,7 @@
 import React, {
     useState,
-    useCallback
+    useCallback,
+    useContext
 } from 'react';
 import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
@@ -9,6 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import HashLoader from "react-spinners/HashLoader";
 import RegisterImage from '../images/register.svg';
 import { register } from '../services/poetry-system';
+import { notifications } from '../components/Notifications';
 
 const Image = styled.img`
     width: 40vw;
@@ -43,6 +45,8 @@ const SubHeaderText = styled.section`
 `;
 
 function Signup() {
+    const show = useContext(notifications);
+
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -60,10 +64,11 @@ function Signup() {
                 history.push('/registered');
             } catch (error) {
                 console.log(error);
+                show.error(error.message);
             }
             setLoading(false);
         },
-        [email, history, password, username]
+        [email, history, password, show, username]
     );
 
     return (
