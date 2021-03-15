@@ -1,10 +1,12 @@
 import React, {
-    useState
+    useState,
+    useCallback
 } from 'react';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import RegisterImage from '../images/register.svg';
+import { register } from '../services/poetry-system';
 
 const Image = styled.img`
     width: 50vw;
@@ -41,6 +43,22 @@ const SubHeaderText = styled.section`
 
 function Signup({ Footer }) {
     const [loading, setLoading] = useState(false);
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [email, setEmail] = useState();
+
+    const local_register = useCallback(
+        async () => {
+            try {
+                await register({ username, password, email });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [email, password, username]
+    );
+
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
