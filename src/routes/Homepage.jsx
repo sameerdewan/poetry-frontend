@@ -48,7 +48,8 @@ function Homepage() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
-                <div className='p-col-6'>
+                <div className='p-col-1'/>  
+                <div className='p-col-5'>
                     <HomePageHeaderGrid>
                         <HeaderText>
                             Generate immutable, decentralized proofs for your files that are cross-blockchain resilient
@@ -69,9 +70,10 @@ function Homepage() {
                         <Button label='Documentation' className='p-button-outlined margin-right-10px' icon='pi pi-book' />
                     </ButtonsContainer>
                 </div>
-                <div className='p-col-6'>
+                <div className='p-col-5'>
                     <FlipImage src={HomepageImage} />
                 </div>
+                <div className='p-col-1'/>
             </TopMarginGrid15px>
         </React.Fragment>
     );
