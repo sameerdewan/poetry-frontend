@@ -56,12 +56,12 @@ function Signup() {
             setLoading(true)
             try {
                 await register({ username, password, email });
+                window.localStorage.setItem('registered', 'true');
+                history.push('/registered');
             } catch (error) {
                 console.log(error);
             }
             setLoading(false);
-            window.localStorage.setItem('registered', 'true');
-            history.push('/registered');
         },
         [email, history, password, username]
     );
