@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { Accordion, AccordionTab } from 'primereact/accordion';
@@ -7,7 +7,8 @@ import { Tree } from 'primereact/tree';
 const SidePanel = styled.section`
     height: calc(100vh - 100px);
     position: relative;
-    width: 250px;
+    width: ${props => props.expanded ? '400px' : '250px'};
+    transition: width .5s;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     & .p-accordion-tab {
         box-shadow: none !important;
@@ -38,7 +39,8 @@ const BottomSidePanel = styled.footer`
     position: absolute;
     bottom: -50px;
     height: 50px;
-    width: 250px;
+    width: ${props => props.expanded ? '400px' : '250px'};
+    transition: width .5s;
     background: var(--poetry_brand);
     box-shadow: rgba(0, 0, 0, 0.15) -7px 3px 3px 6px;
     display: flex;
@@ -58,8 +60,9 @@ const TopPanel = styled.header`
 const BottomPanel = styled.footer`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     color: white;
-    width: calc(100vw - 249px);
-    left: 249px;
+    width: calc(100vw - ${props => props.expanded ? '398.4px' : '249px'});
+    left: ${props => props.expanded ? '398.4px' : '249px'};
+    transition: all .5s;
     position: absolute;
     bottom: 0;
     height: 50px;
@@ -123,13 +126,15 @@ const data = [
 ]
 
 function Layout() {
+    const [expanded, setExpanded] = useState(false);
+
     return (
         <React.Fragment>
             <TopPanel>
 
             </TopPanel>
             <Container>
-                <SidePanel>
+                <SidePanel expanded={expanded}>
                     <Accordion activeIndex={0}>
                         <AccordionTab header='Files'>
                             <Tree value={data} />
@@ -147,12 +152,13 @@ function Layout() {
 
                         </AccordionTab>
                     </Accordion>
-                    <BottomSidePanel>
-                        <Button icon='pi pi-angle-double-right' />
+                    <BottomSidePanel expanded={expanded}>
+                        <Button icon='pi pi-angle-double-right' onClick={() => setExpanded(!expanded)} />
                     </BottomSidePanel>
                 </SidePanel>
+
             </Container>
-            <BottomPanel>
+            <BottomPanel expanded={expanded}>
 
             </BottomPanel>
         </React.Fragment>
