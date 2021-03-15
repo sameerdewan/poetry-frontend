@@ -16,7 +16,6 @@ const TopMarginGrid15px = styled.div`
     & .margin-right-10px {
         margin-right: 10px !important;
     };
-    height: 100vh;
 `;
 
 const LoginHeaderGrid = styled.div`
@@ -39,7 +38,7 @@ const SubHeaderText = styled.section`
     width: 300px;
 `;
 
-function Signin({ Footer }) {
+function Signin() {
     const [loading, setLoading] = useState(false);
     // const [username, setUsername] = useState();
     // const [password, setPassword] = useState();
@@ -47,10 +46,10 @@ function Signin({ Footer }) {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
-                <div className='p-col-5'>
+                <div className='p-col-6'>
                     <Image src={LoginImage} />
                 </div>
-                <div className='p-col-1' />
+
                 <LoginHeaderGrid className='p-col-6'>
                     <center>
                         <HeaderText>
@@ -81,7 +80,6 @@ function Signin({ Footer }) {
                         }
                     </center>
                 </LoginHeaderGrid>
-                <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );

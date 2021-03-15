@@ -5,13 +5,3 @@
 :root {
     --poetry_brand: #673AB6;
 }
-
-.container {
-    position: relative;
-}
-
-.container:first-child {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}

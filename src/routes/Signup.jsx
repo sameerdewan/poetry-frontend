@@ -3,6 +3,7 @@ import React, {
     useCallback
 } from 'react';
 import styled from '@emotion/styled';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import RegisterImage from '../images/register.svg';
@@ -18,7 +19,6 @@ const TopMarginGrid15px = styled.div`
     & .margin-right-10px {
         margin-right: 10px !important;
     };
-    height: 100vh;
 `;
 
 const SignupHeaderGrid = styled.div`
@@ -41,12 +41,14 @@ const SubHeaderText = styled.section`
     width: 300px;
 `;
 
-function Signup({ Footer }) {
+function Signup() {
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     // const [confirmPassword, setConfirmPassword] = useState();
     const [email, setEmail] = useState();
+
+    const history = useHistory();
 
     const local_register = useCallback(
         async () => {
@@ -57,8 +59,10 @@ function Signup({ Footer }) {
                 console.log(error);
             }
             setLoading(false);
+            window.localStorage.setItem('registered', 'true');
+            history.push('/registered');
         },
-        [email, password, username]
+        [email, history, password, username]
     );
 
     return (
@@ -112,7 +116,6 @@ function Signup({ Footer }) {
                         }
                     </center>
                 </SignupHeaderGrid>
-                <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );

@@ -28,7 +28,6 @@ const TopMarginGrid15px = styled.div`
         text-align: center;
         font-size: .8em;
     };
-    height: 100vh;
 `;
 
 const Img = styled.img`
@@ -93,7 +92,7 @@ const columns = [
     { title: 'enterprise', image: Enterprise, bullets: [] }
 ];
 
-function Pricing({ Footer }) {
+function Pricing() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid '>
@@ -102,7 +101,6 @@ function Pricing({ Footer }) {
                         columns.map(column => <PriceColumn {...column} />)
                     }
                 </Padder>)}
-                <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );

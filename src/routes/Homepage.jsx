@@ -8,7 +8,6 @@ const TopMarginGrid15px = styled.div`
     & .margin-right-10px {
         margin-right: 10px !important;
     };
-    height: 100vh;
 `;
 
 const FlipImage = styled.img`
@@ -45,7 +44,7 @@ const ButtonsContainer = styled.section`
     padding-left: 30px;
 `;
 
-function Homepage({ Footer }) {
+function Homepage() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
@@ -73,7 +72,6 @@ function Homepage({ Footer }) {
                 <div className='p-col-6'>
                     <FlipImage src={HomepageImage} />
                 </div>
-                <Footer />
             </TopMarginGrid15px>
         </React.Fragment>
     );
