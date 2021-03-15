@@ -40,7 +40,7 @@ const SubHeaderText = styled.section`
 `;
 
 function Signin() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     // const [username, setUsername] = useState();
     // const [password, setPassword] = useState();
 

@@ -43,7 +43,7 @@ const SubHeaderText = styled.section`
 `;
 
 function Signup() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     // const [confirmPassword, setConfirmPassword] = useState();
