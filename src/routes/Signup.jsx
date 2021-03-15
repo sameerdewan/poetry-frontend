@@ -11,6 +11,7 @@ import HashLoader from "react-spinners/HashLoader";
 import RegisterImage from '../images/register.svg';
 import { register } from '../services/poetry-system';
 import { notifications } from '../components/Notifications';
+import errorParser from '../services/error-parser';
 
 const Image = styled.img`
     width: 40vw;
@@ -62,9 +63,10 @@ function Signup() {
                 await register({ username, password, email });
                 window.localStorage.setItem('registered', 'true');
                 history.push('/registered');
+                show.success(`Registered user ${username}`);
             } catch (error) {
-                console.log(error);
-                show.error(error.message);
+                console.log(error.response);
+                show.error(errorParser(error.response.data.error));
             }
             setLoading(false);
         },

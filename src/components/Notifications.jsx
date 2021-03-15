@@ -7,7 +7,7 @@ export default function Notifications({ children }) {
     const toast = useRef();
     const createToastFn = ({ severity }) => (body) => {
         const summary = severity.charAt(0).toUpperCase() + severity.slice(1);
-        return toast.current.show({ severity, summary, detail: body, life: 3000 });
+        return toast.current.show({ severity, summary, detail: body, life: 5000 });
     };
     const success = createToastFn({ severity: 'success' });
     const info = createToastFn({ severity: 'info' });

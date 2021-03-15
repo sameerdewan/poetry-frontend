@@ -8,6 +8,7 @@ import Signup from './routes/Signup';
 import Signin from './routes/Signin';
 import Pricing from './routes/Pricing';
 import Registered from './routes/Registered';
+import Validated from './routes/Validated';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route exact path='/sign-in' children={<Signin />} />
             <Route exact path='/pricing' children={<Pricing />} />
             <Route exact path='/registered' children={<Registered />} />
+            <Route exact path='/validated/:validationCode' children={<Validated />} />
           </Switch>
           <Footer />
       </Notifications>
