@@ -1,10 +1,10 @@
 import React from 'react';
-import Sidebar from './components/Sidebar';
+import Layout from './components/Layout';
 
 function Dashboard() {
     return (
         <React.Fragment>
-            <Sidebar />
+            <Layout />
         </React.Fragment>
     );
 }
