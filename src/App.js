@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Notifications from './components/Notifications' 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,6 +11,7 @@ import Registered from './routes/Registered';
 import Validated from './routes/Validated';
 
 function App() {
+  const showFooter = useLocation().pathname !== '/dashboard';
   return (
     <React.Fragment>
       <Notifications>
@@ -23,7 +24,7 @@ function App() {
             <Route exact path='/registered' children={<Registered />} />
             <Route exact path='/validated/:validationCode' children={<Validated />} />
           </Switch>
-          <Footer />
+          {showFooter ? <Footer /> : <React.Fragment /> }
       </Notifications>
     </React.Fragment>
   );
