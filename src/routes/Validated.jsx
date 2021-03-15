@@ -3,12 +3,15 @@ import styled from '@emotion/styled';
 import React, { 
     useEffect,
     useCallback,
-    useState 
+    useState, 
+    useContext
 } from 'react';
 import { useParams } from 'react-router';
+import { validate } from '../services/poetry-system';
 import HashLoader from "react-spinners/HashLoader";
 import Error from '../images/error.svg';
 import SuccessImg from '../images/validated.svg';
+import { notifications } from '../components/Notifications';
 
 const Image = styled.img`
     width: 30vw;
@@ -91,10 +94,26 @@ function Success() {
     );
 }
 
-function Validated(props) {
+function Validated() {
+    const show = useContext(notifications);
     const { validationCode } = useParams();
-    const [isLoading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(true);
+    const [isLoading, setLoading] = useState(true);
+    const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await validate({ validationCode });
+                setSuccess(true);
+                setLoading(false);
+                show.success('Validated user');
+            } catch (error) {
+                setSuccess(false);
+                setLoading(false);
+                show.error(`${error.message}`);
+            }
+        })();
+    }, [show, validationCode]);
 
     if (isLoading) return <Checking />;
     if (!success) return <Failed />;
