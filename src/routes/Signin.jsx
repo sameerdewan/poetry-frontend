@@ -7,8 +7,8 @@ import { InputText } from 'primereact/inputtext';
 import LoginImage from '../images/login.svg';
 
 const Image = styled.img`
-    width: 50vw;
-    height: 50vw;
+    width: 40vw;
+    height: 40vw;
 `;
 
 const TopMarginGrid15px = styled.div`
@@ -46,11 +46,12 @@ function Signin() {
     return (
         <React.Fragment>
             <TopMarginGrid15px className='p-grid'>
-                <div className='p-col-6'>
+                <div className='p-col-1' />
+                <div className='p-col-5'>
                     <Image src={LoginImage} />
                 </div>
 
-                <LoginHeaderGrid className='p-col-6'>
+                <LoginHeaderGrid className='p-col-5'>
                     <center>
                         <HeaderText>
                             Login to your account
@@ -80,6 +81,7 @@ function Signin() {
                         }
                     </center>
                 </LoginHeaderGrid>
+                <div className='p-col-1' />
             </TopMarginGrid15px>
         </React.Fragment>
     );
