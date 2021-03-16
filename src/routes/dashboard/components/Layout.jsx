@@ -13,6 +13,7 @@ import logoImage from '../../../images/poetry-white.svg';
 
 function Layout({ children}) {
     const [expanded, setExpanded] = useState(false);
+    const { projectId } = useParams();
     return (
         <React.Fragment>
             <TopPanel>
@@ -25,7 +26,7 @@ function Layout({ children}) {
                         <Button icon='pi pi-plus-circle' label='Folder' />
                     </TBLeft>
                     <TBMiddle>
-                        <small>Project:</small> AaveAave
+                        <small>Project:</small> {projectId}
                     </TBMiddle>
                     <TBRight>
                         <AutoComplete size={25} placeholder='🔎 Search...'/>
@@ -182,7 +183,7 @@ const TBMiddle = styled.section`
     position: relative;
     left: 90px;
     top: -30px;
-    width: calc(100% - 300px);
+    width: calc(100% - 500px);
     text-align: center;
 `;
 
