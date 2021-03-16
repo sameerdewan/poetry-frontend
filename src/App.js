@@ -12,7 +12,7 @@ import Validated from './routes/Validated';
 import Dashboard from './routes/dashboard/Dashboard';
 
 function App() {
-  const isPublicRoute = useLocation().pathname !== '/dashboard';
+  const isPublicRoute = !useLocation().pathname.includes('/dashboard');
   return (
     <React.Fragment>
       <Notifications>
@@ -24,7 +24,7 @@ function App() {
           <Route exact path='/pricing' children={<Pricing />} />
           <Route exact path='/registered' children={<Registered />} />
           <Route exact path='/validated/:validationCode' children={<Validated />} />
-          <Route exact path='/dashboard' children={<Dashboard />} />
+          <Route path='/dashboard' children={<Dashboard />} />
         </Switch>
         {isPublicRoute ? <Footer /> : <React.Fragment /> }
       </Notifications>

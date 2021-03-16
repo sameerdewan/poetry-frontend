@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { Accordion, AccordionTab } from 'primereact/accordion';
@@ -6,6 +7,7 @@ import { Tree } from 'primereact/tree';
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
+import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../../../images/poetry-white.svg';
 
 const SidePanel = styled.section`
@@ -22,8 +24,8 @@ const SidePanel = styled.section`
     };
     height: calc(100vh - 100px);
     position: relative;
-    width: ${props => props.expanded ? '400px' : '250px'};
-    transition: width .5s;
+    min-width: ${props => props.expanded ? '400px' : '250px'};
+    transition: min-width .5s;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     & .p-accordion-tab {
         box-shadow: none !important;
@@ -50,6 +52,22 @@ const SidePanel = styled.section`
     };
 `;
 
+const Main = styled.section`
+    width: 100%;
+    transition: width .5s;
+    & .p-breadcrumb {
+        border: none !important;
+    };
+    & .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text,
+      .p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+        color: var(--poetry_brand);
+    };
+    & .p-breadcrumb ul li.p-breadcrumb-chevron {
+        margin: 0.2rem;
+        color: var(--poetry_brand);
+    };
+`;
+
 const BottomSidePanel = styled.footer`
     position: absolute;
     height: 50px;
@@ -58,7 +76,7 @@ const BottomSidePanel = styled.footer`
     background: var(--poetry_brand);
     box-shadow: rgba(0, 0, 0, 0.15) -7px 3px 3px 6px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 `;
 
 const TopPanel = styled.header`
@@ -105,6 +123,14 @@ const TBLeft = styled.section`
     left: 0;
 `;
 
+const TBMiddle = styled.section`
+    position: relative;
+    left: 90px;
+    top: -30px;
+    width: calc(100% - 300px);
+    text-align: center;
+`;
+
 const TBRight = styled.section`
     position: absolute;
     right: 170px;
@@ -139,10 +165,33 @@ const Members = styled.div`
 
 const Container = styled.div`
     display: inline-flex;
+    width: 100%;
 `;
 
 function Layout() {
     const [expanded, setExpanded] = useState(false);
+    const history = useHistory();
+    const { pathname } = useLocation();
+    const renderBreadcrumbs = useCallback(
+        () => {
+            const pathElements = pathname.split('/').splice(1);
+            let reconstructedURL = '/dashboard';
+            let model = [];
+            for (let i = 1; i < pathElements.length; i++) {
+                const element = pathElements[i];
+                reconstructedURL = `${reconstructedURL}/${element}`
+                const currentReconstructedURL = reconstructedURL;
+                const item = {
+                    label: element.charAt(0).toUpperCase() + element.slice(1),
+                    command: () => history.push(currentReconstructedURL)
+                }
+                model.push(item);
+            }
+            const home = { icon: 'pi pi-home', command: () => history.push('/dashboard') };
+            return { home, model };
+        },
+        [history, pathname]
+    );
 
     return (
         <React.Fragment>
@@ -155,6 +204,9 @@ function Layout() {
                     <TBLeft>
                         <Button icon='pi pi-plus-circle' label='Folder' />
                     </TBLeft>
+                    <TBMiddle>
+                        <small>Project:</small> AaveAave
+                    </TBMiddle>
                     <TBRight>
                         <Avatar label='SE' shape='circle'/>
                     </TBRight>
@@ -186,10 +238,19 @@ function Layout() {
                         </AccordionTab>
                     </Accordion>
                 </SidePanel>
+                <Main>
+                    {
+                        renderBreadcrumbs().model.length === 0 ?
+                        <React.Fragment /> :
+                        <BreadCrumb {...renderBreadcrumbs()} />
+                    }
+                    test content
+                </Main>
             </Container>
             <BottomSidePanel expanded={expanded}>
-                        <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
-                    </BottomSidePanel>
+                <Button className="p-button-sm" icon='pi pi-arrow-left' iconPos='left' label='Projects' />
+                <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
+            </BottomSidePanel>
             <BottomPanel expanded={expanded}>
                 <Pipeline>
                     <Badge value=' 2' severity='success'/>
@@ -210,7 +271,7 @@ function Layout() {
                         <Avatar label="TP" className="p-mr-2" size="small" shape="circle" />
                         <Avatar label="AE" className="p-mr-2" size="small" shape="circle" />
                         <Avatar label="ND" className="p-mr-2" size="small" shape="circle" />
-                        <Avatar label="+2" className="p-mr-2" size="small" shape="circle" />
+                        <Avatar label="+24" className="p-mr-2" size="small" shape="circle" />
                     </AvatarGroup>
                 </Members>
             </BottomPanel>
