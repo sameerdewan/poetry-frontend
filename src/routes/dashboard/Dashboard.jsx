@@ -3,9 +3,9 @@ import Layout from './components/Layout';
 
 function Dashboard() {
     return (
-        <React.Fragment>
-            <Layout />
-        </React.Fragment>
+        <Layout>
+            Test
+        </Layout>
     );
 }
 

@@ -11,7 +11,7 @@ import { Badge } from 'primereact/badge';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../../../images/poetry-white.svg';
 
-function Layout() {
+function Layout({ children }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -48,7 +48,7 @@ function Layout() {
                 </SidePanel>
                 <Main>
                     <Breadcrumbs />
-                    test content
+                    {children}
                 </Main>
             </Container>
             <BottomSidePanel expanded={expanded}>
