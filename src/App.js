@@ -24,7 +24,7 @@ function App() {
           <Route exact path='/pricing' children={<Pricing />} />
           <Route exact path='/registered' children={<Registered />} />
           <Route exact path='/validated/:validationCode' children={<Validated />} />
-          <Route path='/dashboard' children={<Dashboard />} />
+          <Route path='/dashboard' component={(props) => <Dashboard {...props} />} />
         </Switch>
         {isPublicRoute ? <Footer /> : <React.Fragment /> }
       </Notifications>

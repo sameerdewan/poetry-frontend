@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -11,9 +11,8 @@ import { Badge } from 'primereact/badge';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../../../images/poetry-white.svg';
 
-function Layout({ children }) {
+function Layout({ children}) {
     const [expanded, setExpanded] = useState(false);
-
     return (
         <React.Fragment>
             <TopPanel>
@@ -297,13 +296,14 @@ const dummyTabs = [
     { header: 'Settings', data },
 ];
 
-function Breadcrumbs () {
+function Breadcrumbs() {
     const history = useHistory();
     const { pathname } = useLocation();
+    const { projectId } = useParams();
     const renderBreadcrumbs = useCallback(
         () => {
-            const pathElements = pathname.split('/').splice(1);
-            let reconstructedURL = '/dashboard';
+            const pathElements = pathname.split('/').splice(3);
+            let reconstructedURL = `/dashboard/projects/${projectId}`;
             let model = [];
             for (let i = 1; i < pathElements.length; i++) {
                 const element = pathElements[i];
@@ -315,10 +315,10 @@ function Breadcrumbs () {
                 }
                 model.push(item);
             }
-            const home = { icon: 'pi pi-home', command: () => history.push('/dashboard') };
+            const home = { icon: 'pi pi-home', command: () => history.push(`/dashboard/projects/${projectId}`) };
             return { home, model };
         },
-        [history, pathname]
+        [history, pathname, projectId]
     );
 
     if (renderBreadcrumbs().model.length === 0) {
