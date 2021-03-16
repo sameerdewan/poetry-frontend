@@ -10,6 +10,60 @@ import { Badge } from 'primereact/badge';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../../../images/poetry-white.svg';
 
+function Layout() {
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+        <React.Fragment>
+            <TopPanel>
+                <Logo>
+                    <LogoImage src={logoImage} />
+                    <span>poetry</span>
+                </Logo>
+                <Taskbar>
+                    <TBLeft>
+                        <Button icon='pi pi-plus-circle' label='Folder' />
+                    </TBLeft>
+                    <TBMiddle>
+                        <small>Project:</small> AaveAave
+                    </TBMiddle>
+                    <TBRight>
+                        <Avatar label='SE' shape='circle'/>
+                    </TBRight>
+                </Taskbar>
+            </TopPanel>
+            <Container>
+                <SidePanel expanded={expanded}>
+                    <Accordion activeIndex={0}>
+                        {
+                            dummyTabs.map(dT =>         
+                                <AccordionTab header={dT.header}>
+                                    <Tree value={dT.data} />
+                                </AccordionTab>
+                            )
+                        }
+                    </Accordion>
+                </SidePanel>
+                <Main>
+                    <Breadcrumbs />
+                    test content
+                </Main>
+            </Container>
+            <BottomSidePanel expanded={expanded}>
+                <Button className="p-button-sm" icon='pi pi-arrow-left' iconPos='left' label='Projects' />
+                <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
+            </BottomSidePanel>
+            <BottomPanel expanded={expanded}>
+                <Pipeline />
+                <Members members={['SE', 'AE', 'ND', 'TP', 'NS']}/>
+            </BottomPanel>
+        </React.Fragment>
+    );
+}
+
+export default Layout;
+
+
 const SidePanel = styled.section`
     overflow-y: scroll;
     ::-webkit-scrollbar {
@@ -148,7 +202,7 @@ const BottomPanel = styled.footer`
     height: 50px;
 `;
 
-const Pipeline = styled.div`
+const PipelineContainer = styled.div`
     position: absolute;
     left: 20px;
     top: 12.5px;
@@ -157,7 +211,7 @@ const Pipeline = styled.div`
     font-family: poetry;
 `;
 
-const Members = styled.div`
+const MembersContainer = styled.div`
     position: absolute;
     right: 0;
     top: 0;
@@ -167,119 +221,6 @@ const Container = styled.div`
     display: inline-flex;
     width: 100%;
 `;
-
-function Layout() {
-    const [expanded, setExpanded] = useState(false);
-    const history = useHistory();
-    const { pathname } = useLocation();
-    const renderBreadcrumbs = useCallback(
-        () => {
-            const pathElements = pathname.split('/').splice(1);
-            let reconstructedURL = '/dashboard';
-            let model = [];
-            for (let i = 1; i < pathElements.length; i++) {
-                const element = pathElements[i];
-                reconstructedURL = `${reconstructedURL}/${element}`
-                const currentReconstructedURL = reconstructedURL;
-                const item = {
-                    label: element.charAt(0).toUpperCase() + element.slice(1),
-                    command: () => history.push(currentReconstructedURL)
-                }
-                model.push(item);
-            }
-            const home = { icon: 'pi pi-home', command: () => history.push('/dashboard') };
-            return { home, model };
-        },
-        [history, pathname]
-    );
-
-    return (
-        <React.Fragment>
-            <TopPanel>
-                <Logo>
-                    <LogoImage src={logoImage} />
-                    <span>poetry</span>
-                </Logo>
-                <Taskbar>
-                    <TBLeft>
-                        <Button icon='pi pi-plus-circle' label='Folder' />
-                    </TBLeft>
-                    <TBMiddle>
-                        <small>Project:</small> AaveAave
-                    </TBMiddle>
-                    <TBRight>
-                        <Avatar label='SE' shape='circle'/>
-                    </TBRight>
-                </Taskbar>
-            </TopPanel>
-            <Container>
-                <SidePanel expanded={expanded}>
-                    <Accordion activeIndex={0}>
-                        <AccordionTab header='Folders'>
-                            <Tree value={data} />
-                        </AccordionTab>
-                        <AccordionTab header='Files'>
-                            <Tree value={data} />
-                        </AccordionTab>
-                        <AccordionTab header='Networks'>
-
-                        </AccordionTab>
-                        <AccordionTab header='History'>
-
-                        </AccordionTab>
-                        <AccordionTab header='API'>
-
-                        </AccordionTab>
-                        <AccordionTab header='Subscription'>
-
-                        </AccordionTab>
-                        <AccordionTab header='Settings'>
-
-                        </AccordionTab>
-                    </Accordion>
-                </SidePanel>
-                <Main>
-                    {
-                        renderBreadcrumbs().model.length === 0 ?
-                        <React.Fragment /> :
-                        <BreadCrumb {...renderBreadcrumbs()} />
-                    }
-                    test content
-                </Main>
-            </Container>
-            <BottomSidePanel expanded={expanded}>
-                <Button className="p-button-sm" icon='pi pi-arrow-left' iconPos='left' label='Projects' />
-                <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
-            </BottomSidePanel>
-            <BottomPanel expanded={expanded}>
-                <Pipeline>
-                    <Badge value=' 2' severity='success'/>
-                    &nbsp;
-                    <small>in progress</small>
-                    &nbsp;
-                    <Badge value='28' />
-                    &nbsp;
-                    <small>completed</small>
-                    &nbsp;
-                    <Badge value=' 1' severity='warning'/>
-                    &nbsp;
-                    <small>failed</small>
-                </Pipeline>
-                <Members>
-                    <AvatarGroup className='p-col-12'>
-                        <Avatar label="SE" className="p-mr-2" size="small" shape="circle" />
-                        <Avatar label="TP" className="p-mr-2" size="small" shape="circle" />
-                        <Avatar label="AE" className="p-mr-2" size="small" shape="circle" />
-                        <Avatar label="ND" className="p-mr-2" size="small" shape="circle" />
-                        <Avatar label="+24" className="p-mr-2" size="small" shape="circle" />
-                    </AvatarGroup>
-                </Members>
-            </BottomPanel>
-        </React.Fragment>
-    );
-}
-
-export default Layout;
 
 const data = [
     {
@@ -332,4 +273,94 @@ const data = [
             "children": [{ "key": "2-1-0", "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "key": "2-1-1", "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
         }]
     }
-]
+];
+
+function Breadcrumbs () {
+    const history = useHistory();
+    const { pathname } = useLocation();
+    const renderBreadcrumbs = useCallback(
+        () => {
+            const pathElements = pathname.split('/').splice(1);
+            let reconstructedURL = '/dashboard';
+            let model = [];
+            for (let i = 1; i < pathElements.length; i++) {
+                const element = pathElements[i];
+                reconstructedURL = `${reconstructedURL}/${element}`
+                const currentReconstructedURL = reconstructedURL;
+                const item = {
+                    label: element.charAt(0).toUpperCase() + element.slice(1),
+                    command: () => history.push(currentReconstructedURL)
+                }
+                model.push(item);
+            }
+            const home = { icon: 'pi pi-home', command: () => history.push('/dashboard') };
+            return { home, model };
+        },
+        [history, pathname]
+    );
+
+    if (renderBreadcrumbs().model.length === 0) {
+        return <React.Fragment />;
+    }
+
+    return <BreadCrumb {...renderBreadcrumbs()} />;
+}
+
+const dummyTabs = [
+    { header: 'Folders', data },
+    { header: 'Files', data },
+    { header: 'Networks', data },
+    { header: 'History', data },
+    { header: 'API', data },
+    { header: 'Subscription', data },
+    { header: 'Settings', data },
+];
+
+function Pipeline({ inProgress = 0, completed = 0, failed = 0 }) {
+    const formatValue = (value) => value.length === 1 ? ` ${value}` : `${value}`;
+    return (
+        <PipelineContainer>
+            <Badge value={formatValue(inProgress)} severity='success'/>
+            &nbsp;
+            <small>in progress</small>
+            &nbsp;
+            <Badge value={formatValue(completed)} />
+            &nbsp;
+            <small>completed</small>
+            &nbsp;
+            <Badge value={formatValue(failed)} severity='warning'/>
+            &nbsp;
+            <small>failed</small>           
+        </PipelineContainer>
+    );
+}
+
+function Members({ members = [] }) {
+    const retrieveFirst4 = () => {
+        const first4 = [];
+        for (let i = 0; i < members.length && i < 3; i++) {
+            const member = members[i];
+            first4.push(member);
+        }
+        return first4;
+    };
+    const retrieveRemaining = () => {
+        if (members.length > 4) {
+            return members.length - 4;
+        }
+        return 0;
+    };
+    return (
+        <MembersContainer>
+            <AvatarGroup className='p-col-12'>
+                {
+                    retrieveFirst4().map(f4 => <Avatar label={f4} className="p-mr-2" size="small" shape="circle" />)
+                }
+                {
+                    retrieveRemaining() === 0 ? <React.Fragment /> :
+                    <Avatar label={`+${retrieveRemaining()}`} className="p-mr-2" size="small" shape="circle" />
+                }
+            </AvatarGroup>
+        </MembersContainer>
+    );
+}
