@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
+import { AutoComplete } from 'primereact/autocomplete';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Tree } from 'primereact/tree';
 import { Avatar } from 'primereact/avatar';
@@ -28,6 +29,7 @@ function Layout() {
                         <small>Project:</small> AaveAave
                     </TBMiddle>
                     <TBRight>
+                        <AutoComplete size={25} placeholder='🔎 Search...'/>
                         <Avatar label='SE' shape='circle'/>
                     </TBRight>
                 </Taskbar>
@@ -188,7 +190,17 @@ const TBMiddle = styled.section`
 const TBRight = styled.section`
     position: absolute;
     right: 170px;
+    display: flex;
+    justify-content: space-between;
+    width: 310px;
     top: 5px;
+    & > * input {
+        height: 10px !important;
+        position: relative;
+        top: -2px;
+        color: var(--poetry_brand);
+        font-family: poetry;
+    };
 `;
 
 const BottomPanel = styled.footer`
@@ -275,6 +287,16 @@ const data = [
     }
 ];
 
+const dummyTabs = [
+    { header: 'Folders', data },
+    { header: 'Files', data },
+    { header: 'Networks', data },
+    { header: 'History', data },
+    { header: 'API', data },
+    { header: 'Subscription', data },
+    { header: 'Settings', data },
+];
+
 function Breadcrumbs () {
     const history = useHistory();
     const { pathname } = useLocation();
@@ -305,16 +327,6 @@ function Breadcrumbs () {
 
     return <BreadCrumb {...renderBreadcrumbs()} />;
 }
-
-const dummyTabs = [
-    { header: 'Folders', data },
-    { header: 'Files', data },
-    { header: 'Networks', data },
-    { header: 'History', data },
-    { header: 'API', data },
-    { header: 'Subscription', data },
-    { header: 'Settings', data },
-];
 
 function Pipeline({ inProgress = 0, completed = 0, failed = 0 }) {
     const formatValue = (value) => value.length === 1 ? ` ${value}` : `${value}`;
