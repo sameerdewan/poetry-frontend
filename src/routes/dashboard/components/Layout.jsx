@@ -3,6 +3,9 @@ import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Tree } from 'primereact/tree';
+import { Avatar } from 'primereact/avatar';
+import { AvatarGroup } from 'primereact/avatargroup';
+import { Badge } from 'primereact/badge';
 import logoImage from '../../../images/poetry-white.svg';
 
 const SidePanel = styled.section`
@@ -89,15 +92,49 @@ const LogoImage = styled.img`
     width: 25px;
 `;
 
+const Taskbar = styled.section`
+    position: relative;
+    top: -8px;
+    left: 160px;
+    width: 100%;
+    height: 25px;
+`;
+
+const TBLeft = styled.section`
+    position: relative;
+    left: 0;
+`;
+
+const TBRight = styled.section`
+    position: absolute;
+    right: 170px;
+    top: 5px;
+`;
+
 const BottomPanel = styled.footer`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     color: white;
     width: calc(100vw - ${props => props.expanded ? '398.4px' : '249px'});
     left: ${props => props.expanded ? '398.4px' : '249px'};
     transition: all .5s;
-    position: absolute;
+    position: relative;
     bottom: 0;
     height: 50px;
+`;
+
+const Pipeline = styled.div`
+    position: absolute;
+    left: 20px;
+    top: 12.5px;
+    color: red;
+    color: var(--poetry_brand);
+    font-family: poetry;
+`;
+
+const Members = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
 `;
 
 const Container = styled.div`
@@ -114,12 +151,26 @@ function Layout() {
                     <LogoImage src={logoImage} />
                     <span>poetry</span>
                 </Logo>
+                <Taskbar>
+                    <TBLeft>
+                        <Button icon='pi pi-plus-circle' label='Folder' />
+                    </TBLeft>
+                    <TBRight>
+                        <Avatar label='SE' shape='circle'/>
+                    </TBRight>
+                </Taskbar>
             </TopPanel>
             <Container>
                 <SidePanel expanded={expanded}>
                     <Accordion activeIndex={0}>
+                        <AccordionTab header='Folders'>
+                            <Tree value={data} />
+                        </AccordionTab>
                         <AccordionTab header='Files'>
                             <Tree value={data} />
+                        </AccordionTab>
+                        <AccordionTab header='Networks'>
+
                         </AccordionTab>
                         <AccordionTab header='History'>
 
@@ -140,7 +191,28 @@ function Layout() {
                         <Button icon={`pi pi-angle-double-${expanded ? 'left' : 'right'}`} onClick={() => setExpanded(!expanded)} />
                     </BottomSidePanel>
             <BottomPanel expanded={expanded}>
-
+                <Pipeline>
+                    <Badge value=' 2' severity='success'/>
+                    &nbsp;
+                    <small>in progress</small>
+                    &nbsp;
+                    <Badge value='28' />
+                    &nbsp;
+                    <small>completed</small>
+                    &nbsp;
+                    <Badge value=' 1' severity='warning'/>
+                    &nbsp;
+                    <small>failed</small>
+                </Pipeline>
+                <Members>
+                    <AvatarGroup className='p-col-12'>
+                        <Avatar label="SE" className="p-mr-2" size="small" shape="circle" />
+                        <Avatar label="TP" className="p-mr-2" size="small" shape="circle" />
+                        <Avatar label="AE" className="p-mr-2" size="small" shape="circle" />
+                        <Avatar label="ND" className="p-mr-2" size="small" shape="circle" />
+                        <Avatar label="+2" className="p-mr-2" size="small" shape="circle" />
+                    </AvatarGroup>
+                </Members>
             </BottomPanel>
         </React.Fragment>
     );
