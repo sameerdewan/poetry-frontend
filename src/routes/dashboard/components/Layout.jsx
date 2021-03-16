@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Tree } from 'primereact/tree';
+import logoImage from '../../../images/poetry-white.svg';
 
 const SidePanel = styled.section`
     overflow-y: scroll;
@@ -63,8 +64,29 @@ const TopPanel = styled.header`
     height: 50px;
     width: 100vw;
     font-family: poetry;
-    color: var(--poetry_brand);
+    color: white;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    display: flex;
+    align-items: center; 
+`;
+
+const Logo = styled.section`
+    display: flex;
+    height: 25px;
+    width: 80px;
+    position: relative;
+    left: 5px;
+    top: -2px;
+    & span {
+        position: relative;
+        top: 6px;
+        left: 2px;
+    };
+`;
+
+const LogoImage = styled.img`
+    height: 25px;
+    width: 25px;
 `;
 
 const BottomPanel = styled.footer`
@@ -88,7 +110,10 @@ function Layout() {
     return (
         <React.Fragment>
             <TopPanel>
-
+                <Logo>
+                    <LogoImage src={logoImage} />
+                    <span>poetry</span>
+                </Logo>
             </TopPanel>
             <Container>
                 <SidePanel expanded={expanded}>
