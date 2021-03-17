@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
@@ -12,50 +13,20 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../images/poetry-white.svg';
 
 function Layout({ children}) {
-    const { projectId } = useParams();
-    const { pathname } = useLocation();
-
+    const [activeIndex, setActiveIndex] = useState();
+    const [projectId, setProjectId] = useState('');
     const [expanded, setExpanded] = useState(false);
-    const [selectionKeys, setSelectionKeys] = useState();
 
-    const formatTreeMenuData = useCallback(
-        () => {
-
+    const onTabChange = useCallback(
+        ({ index, originalEvent }) => {
+            console.log(index, originalEvent)
         },
         []
     );
 
-    const onSelectTreeMenu = useCallback(
-        () => {
-
-        },
-        []
-    );
-
-    const getActiveIndex = useCallback(
-        () => {
-            if (pathname.includes('/dashboard/projects/test/folders')) {
-                window.poetryPreviousTabOpenIndex = 0;
-                return 0;
-            }
-            return window.poetryPreviousTabOpenIndex;
-        },
-        [pathname]
-    );
-
-    const getSelectionKeys = useCallback(
-        () => {
-            // match to route
-        },
-        []
-    );
-
-    const goToSelectionKeyRoute = useCallback(
-        () => {
-            // check data payload, go to route matching key
-        },
-        []
-    );
+    useEffect(() => {
+        setProjectId(window.poetryProjectId);
+    }, [window.poetryProjectId]);
 
     return (
         <React.Fragment>
@@ -79,16 +50,14 @@ function Layout({ children}) {
             </TopPanel>
             <Container>
                 <SidePanel expanded={expanded}>
-                    <Accordion activeIndex={getActiveIndex()}>
+                    <Accordion activeIndex={activeIndex} onTabChange={onTabChange}>
                         {
                             dummyTabs.map(dT =>         
                                 <AccordionTab header={dT.header}>
                                     <Tree
                                         value={dT.data} 
-                                        selectionKeys={selectionKeys}
-                                        selectionMode="single" 
-                                        onSelectionChange={e => setSelectionKeys(e.value)}
-                                        onSelect={() => console.log(selectionKeys)}/>
+                                        selectionMode="single"
+                                    />
                                 </AccordionTab>
                             )
                         }
@@ -306,7 +275,12 @@ const dummyTabs = [
 function Breadcrumbs() {
     const history = useHistory();
     const { pathname } = useLocation();
-    const { projectId } = useParams();
+    const [projectId, setProjectId] = useState('');
+    
+    useEffect(() => {
+        setProjectId(window.poetryProjectId);
+    }, [window.poetryProjectId]);
+
     const renderBreadcrumbs = useCallback(
         () => {
             const pathElements = pathname.split('/').splice(3);

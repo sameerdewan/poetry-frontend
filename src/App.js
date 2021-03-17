@@ -11,6 +11,14 @@ import Registered from './routes/Registered';
 import Validated from './routes/Validated';
 import Layout from './components/Layout';
 import Folders from './routes/Folders';
+import usePoetryProjectId from './hooks/usePoetryProjectId';
+
+function PoetryId() {
+  usePoetryProjectId();
+  return (
+    <React.Fragment />
+  );
+}
 
 function App() {
   const isPublicRoute = !useLocation().pathname.includes('/dashboard');
@@ -33,10 +41,10 @@ function App() {
             <Route exact path='/dashboard' children={<div>dashboard</div>}/>
             <Route exact path ='/dashboard/projects' children={<div>all projects</div>} />
             <Layout>
-              <Route exact path='/dashboard/projects/:projectId' children={'main project page'} />
+              <Route path='/dashboard/projects/:projectId' children={<PoetryId />} />
+              <Route exact path='/dashboard/projects/:projectId' children={<div>main</div>} />
               <Route exact path='/dashboard/projects/:projectId/folders' children={<Folders />} />
-              <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div>folder</div>} />
-              <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div>file</div>} />
+              <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div></div>} />
             </Layout>
           </Switch> :
           <React.Fragment />
