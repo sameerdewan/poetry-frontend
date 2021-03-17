@@ -9,7 +9,8 @@ import Signin from './routes/Signin';
 import Pricing from './routes/Pricing';
 import Registered from './routes/Registered';
 import Validated from './routes/Validated';
-import Dashboard from './routes/dashboard/Dashboard';
+import Layout from './components/Layout';
+import Folders from './routes/Folders';
 
 function App() {
   const isPublicRoute = !useLocation().pathname.includes('/dashboard');
@@ -24,9 +25,22 @@ function App() {
           <Route exact path='/pricing' children={<Pricing />} />
           <Route exact path='/registered' children={<Registered />} />
           <Route exact path='/validated/:validationCode' children={<Validated />} />
-          <Route path='/dashboard' component={(props) => <Dashboard {...props} />} />
         </Switch>
         {isPublicRoute ? <Footer /> : <React.Fragment /> }
+        {
+          !isPublicRoute ?
+          <Switch>
+            <Route exact path='/dashboard' children={<div>dashboard</div>}/>
+            <Route exact path ='/dashboard/projects' children={<div>all projects</div>} />
+            <Layout>
+              <Route exact path='/dashboard/projects/:projectId' children={'main project page'} />
+              <Route exact path='/dashboard/projects/:projectId/folders' children={<Folders />} />
+              <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div>folder</div>} />
+              <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div>file</div>} />
+            </Layout>
+          </Switch> :
+          <React.Fragment />
+        }
       </Notifications>
     </React.Fragment>
   );
