@@ -43,7 +43,7 @@ function App() {
             <Layout>
               <Route path='/dashboard/projects/:projectId' children={<PoetryId />} />
               <Route exact path='/dashboard/projects/:projectId' children={<div>main</div>} />
-              <Route exact path='/dashboard/projects/:projectId/folders' children={<Folders />} />
+              <Route exact path='/dashboard/projects/:projectId/folders' render={props => <Folders {...props} />} />
               <Route exact path='/dashboard/projects/:projectId/folders/:folderId' children={<div></div>} />
             </Layout>
           </Switch> :

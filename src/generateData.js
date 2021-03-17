@@ -152,6 +152,7 @@ function generateUsers(numUsers = 0) {
 function generateFolder(files) {
     const folder = {};
     folder.id = generateHash();
+    folder.name = createFileName();
     folder.projectId = projectId;
     const tripleBools = generateTripleBools();
     folder.networks = {
@@ -276,6 +277,7 @@ function generateLog(generatedFile) {
         initLog.message = '';
         initLog.network = 'ethereum';
         initLog.fileName = generatedFile.fileName;
+        initLog.folderId = generatedFile.folder;
         initLog.hash = generatedFile.hash;
         initLog.date = generatedFile.ethereum.date;
         fileLogs.push(initLog);
@@ -286,6 +288,7 @@ function generateLog(generatedFile) {
         postLog.message = generatedFile.ethereum.message;
         postLog.network = 'ethereum';
         postLog.fileName = generatedFile.fileName;
+        postLog.folderId = generatedFile.folder;
         postLog.hash = generatedFile.hash;
         postLog.date = generateDateDelay(generatedFile.ethereum.date);
         fileLogs.push(postLog);
@@ -297,6 +300,7 @@ function generateLog(generatedFile) {
         initLog.message = '';
         initLog.network = 'harmony';
         initLog.fileName = generatedFile.fileName;
+        initLog.folderId = generatedFile.folder;
         initLog.hash = generatedFile.hash;
         initLog.date = generatedFile.harmony.date;
         fileLogs.push(initLog);
@@ -307,6 +311,7 @@ function generateLog(generatedFile) {
         postLog.message = generatedFile.harmony.message;
         postLog.network = 'harmony';
         postLog.fileName = generatedFile.fileName;
+        postLog.folderId = generatedFile.folder;
         postLog.hash = generatedFile.hash;
         postLog.date = generateDateDelay(generatedFile.harmony.date);
         fileLogs.push(postLog);
@@ -318,6 +323,7 @@ function generateLog(generatedFile) {
         initLog.message = '';
         initLog.network = 'polkadot';
         initLog.fileName = generatedFile.fileName;
+        initLog.folderId = generatedFile.folder;
         initLog.hash = generatedFile.hash;
         initLog.date = generatedFile.polkadot.date;
         fileLogs.push(initLog);
@@ -328,6 +334,7 @@ function generateLog(generatedFile) {
         postLog.message = generatedFile.polkadot.message;
         postLog.network = 'polkadot';
         postLog.fileName = generatedFile.fileName;
+        postLog.folderId = generatedFile.folder;
         postLog.hash = generatedFile.hash;
         postLog.date = generateDateDelay(generatedFile.polkadot.date);
         fileLogs.push(postLog);
@@ -343,7 +350,6 @@ function generateData(files = 0, folders = 0) {
         const folder = generateFolder(folderFileCount);
         foldersArr.push(folder);
     }
-    fs.writeFileSync('./dummyData/folders.json', JSON.stringify(foldersArr, null, 2), 'utf8');
     const allFiles = foldersArr.map(folder => folder.files).flat();
     const filesArr = [];
     for (let i = 0; i < allFiles.length; i++) {
@@ -360,6 +366,22 @@ function generateData(files = 0, folders = 0) {
     }
     logsArr = logsArr.flat();
     fs.writeFileSync('./dummyData/logs.json', JSON.stringify(logsArr, null, 2), 'utf8');
+    const orderedEarliestDates = JSON.parse(JSON.stringify(logsArr)).sort((a, b) => {
+        return Date.parse(a.date) > Date.parse(b.date) ? b : a;
+    });
+    const orderedMostRecentDates = JSON.parse(JSON.stringify(logsArr)).sort((a, b) => {
+        return Date.parse(a.date) > Date.parse(b.date) ? a : b;
+    });
+    for (let i = 0; i < foldersArr.length; i++) {
+        const folderId = foldersArr[i].id;
+        const earliestRecord = orderedEarliestDates.find(x => x.folderId === folderId);
+        const createdDate = new Date(earliestRecord.date).addHours(-5);
+        const mostRecentRecord = orderedMostRecentDates.find(x => x.folderId === folderId);
+        const lastUpdated = mostRecentRecord.date;
+        foldersArr[i].createdDate = createdDate;
+        foldersArr[i].lastUpdated = lastUpdated;
+    }
+    fs.writeFileSync('./dummyData/folders.json', JSON.stringify(foldersArr, null, 2), 'utf8');
 }
 
 generateUsers(args.u);

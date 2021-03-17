@@ -15,3 +15,13 @@ export const register = async ({ username, password, email }) => {
 export const validate = async ({ validationCode }) => {
     await axios.post(`${baseURL}/api/registration/validate/${validationCode}`);
 };
+
+export const getFolders = async () => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const folders = require('../dummyData/folders.json');
+            resolve(folders);
+        }, 2000);
+    });
+};
+ 

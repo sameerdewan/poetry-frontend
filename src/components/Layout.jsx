@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import styled from '@emotion/styled';
 import { Button } from 'primereact/button';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -11,18 +11,72 @@ import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../images/poetry-white.svg';
+import { getFolders } from '../services/poetry-system';
+
+const createFoldersTreeData = (folders = []) => {
+    const root = [];
+    for (let i = 0; i < folders.length; i++) {
+        const folderData = folders[i];
+        const folder = {};
+        folder.key = i;
+        folder.label = folderData.name;
+        folder.data = folderData.name;
+        folder.icon = 'pi pi-fw pi-folder';
+        folder.children = [];
+        for (let j = 0; j < folderData.files.length; j++) {
+            const fileData = folderData.files[j];
+            const file = {};
+            file.key = `${i}-${j}`;
+            file.label = fileData.fileName;
+            file.data = fileData.hash;
+            folder.children.push(file);
+        }
+        root.push(folder);
+    }
+    return root;
+};
+
+export const LayoutContext = React.createContext({});
 
 function Layout({ children}) {
     const [activeIndex, setActiveIndex] = useState();
     const [projectId, setProjectId] = useState('');
     const [expanded, setExpanded] = useState(false);
+    const [folders, setFolders] = useState([]);
+
+    const history = useHistory();
 
     const onTabChange = useCallback(
         ({ index, originalEvent }) => {
-            console.log(index, originalEvent)
+            setActiveIndex(index);
+            const { innerText } = originalEvent.target;
+            if (innerText === 'Folders') {
+                return history.push(`/dashboard/projects/${projectId}/folders`);
+            }
         },
-        []
+        [projectId]
     );
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const folders = await getFolders();
+                setFolders(folders);
+            } catch (error) {
+
+            }
+        })();
+    }, []);
+
+    const dummyTabs = [
+        { header: 'Folders', data: createFoldersTreeData(folders) },
+        { header: 'Files', data },
+        { header: 'Networks', data },
+        { header: 'Logs', data },
+        { header: 'API', data },
+        { header: 'Subscription', data },
+        { header: 'Settings', data },
+    ];
 
     useEffect(() => {
         setProjectId(window.poetryProjectId);
@@ -66,7 +120,9 @@ function Layout({ children}) {
                 <Main>
                     <Breadcrumbs />
                     <div style={{ margin: '10px', display: 'flex', justifyContent:'center' }}>
-                        {children}
+                        <LayoutContext.Provider value={{ folders }}>
+                            {children}
+                        </LayoutContext.Provider>
                     </div>
                 </Main>
             </Container>
@@ -260,16 +316,6 @@ const data = [
         "icon": "pi pi-fw pi-eye",
         "selectable": true
     }
-];
-
-const dummyTabs = [
-    { header: 'Folders', data },
-    { header: 'Files', data },
-    { header: 'Networks', data },
-    { header: 'Logs', data },
-    { header: 'API', data },
-    { header: 'Subscription', data },
-    { header: 'Settings', data },
 ];
 
 function Breadcrumbs() {
