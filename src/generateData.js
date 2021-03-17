@@ -1,7 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const args = require('minimist')(process.argv.slice(2));
-const { uniqueNamesGenerator, names } = require('unique-names-generator');
+const { uniqueNamesGenerator, names, animals, colors, adjectives } = require('unique-names-generator');
 
 const namesConfig = {
     dictionaries: [names, names],
@@ -9,6 +9,20 @@ const namesConfig = {
     separator: '_',
     style: 'lowerCase'
 };
+
+const filesConfig = {
+    dictionaries: [animals, colors, adjectives],
+    length: 2,
+    separator: ' ',
+};
+
+function createFileName() {
+    const pre = uniqueNamesGenerator(filesConfig);
+    const post = pre.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      }).replace(/\s+/g, '');
+    return post;
+}
 
 // eslint-disable-next-line no-extend-native
 Date.prototype.addHours = function(h) {
@@ -146,16 +160,13 @@ function generateFolder(files) {
         polkadot: tripleBools[2]
     };
     folder.files = [];
-    let index = 1;
-    while (folder.files.length <= files) {
-        index = index + 1;
+    while (folder.files.length < files) {
         const file = {
-            fileName: `testFile${index}.${generateExtension()}`,
+            fileName: `${createFileName()}.${generateExtension()}`,
             hash: generateHash(),
             folder: folder.id
         }
         folder.files.push(file);
-        if (index >= files) break;
     }
     return folder;
 }
@@ -325,7 +336,7 @@ function generateLog(generatedFile) {
 }
 
 function generateData(files = 0, folders = 0) {
-    const randomFolderFileCountArr = generateRandomSplit(files, folders);
+    const randomFolderFileCountArr = folders === 1 ? [files] : generateRandomSplit(files, folders);
     const foldersArr = [];
     for (let i = 0; i < randomFolderFileCountArr.length; i++) {
         const folderFileCount = randomFolderFileCountArr[i];
