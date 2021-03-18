@@ -29,6 +29,9 @@ const Table = styled(DataTable)`
         background: var(--poetry_brand);
         border: 1px solid var(--poetry_brand);
     };
+    & .p-paginator-bottom {
+        border-width: 0 0 0 0;
+    };
     & > * input {
         height: 20px !important;
         color: var(--poetry_brand);
@@ -59,8 +62,21 @@ const columns = [
 
 function Folders() {
     const { folders } = useContext(LayoutContext);
+    const tableProps = {
+        value: folders,
+        className: 'p-datatable-sm',
+        emptyMessage: 'No folders found',
+        scrollable: true,
+        scrollHeight: '61vh', 
+        removableSort: true,
+        paginator: true,
+        paginatorTemplate: 'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
+        currentPageReportTemplate: 'Showing {first} to {last} of {totalRecords}',
+        rows: 20,
+        rowsPerPageOptions: [20,40,80, 100]
+    };
     return(
-        <Table value={folders} emptyMessage='No folders found' className='p-datatable-sm' scrollable scrollHeight="68vh" removableSort>
+        <Table {...tableProps}>
             {
                 columns.map(column => <Column {...column} />)
             }

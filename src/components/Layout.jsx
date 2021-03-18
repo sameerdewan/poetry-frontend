@@ -153,6 +153,16 @@ const SidePanel = styled.section`
         background: var(--poetry_brand);
         border: 1px solid var(--poetry_brand);
     };
+    .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon, .p-treenode {
+        font-weight: 400;
+    };
+    .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+        background: rgb(103,58,188, .2) !important;
+    };
+    .p-treenode-children > * {
+        color: grey !important;
+        font-weight: 100;
+    };
     height: calc(100vh - 100px);
     position: relative;
     min-width: ${props => props.expanded ? '400px' : '250px'};
