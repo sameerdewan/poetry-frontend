@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { LayoutContext } from '../components/Layout';
+import { useHistory, useLocation } from 'react-router';
 
 const defaultNetworkStyles = `
     cursor: default;
@@ -31,6 +32,9 @@ const Table = styled(DataTable)`
     };
     & .p-paginator-bottom {
         border-width: 0 0 0 0;
+    };
+    & .p-datatable-tbody > tr:nth-child(even) {
+        background: rgb(103,58,181, .04) !important;
     };
     & > * input {
         height: 20px !important;
@@ -62,9 +66,11 @@ const columns = [
 
 function Folders() {
     const { folders } = useContext(LayoutContext);
+    const history = useHistory();
+    const { pathname } = useLocation();
     const tableProps = {
         value: folders,
-        className: 'p-datatable-sm',
+        className: 'p-datatable-sm p-datatable-striped',
         emptyMessage: 'No folders found',
         scrollable: true,
         scrollHeight: '61vh', 
@@ -73,7 +79,9 @@ function Folders() {
         paginatorTemplate: 'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         currentPageReportTemplate: 'Showing {first} to {last} of {totalRecords}',
         rows: 20,
-        rowsPerPageOptions: [20,40,80, 100]
+        rowsPerPageOptions: [20,40,80, 100],
+        selectionMode: 'single',
+        onSelectionChange: ({ value: { name } }) => history.push(`${pathname}/${name}`),
     };
     return(
         <Table {...tableProps}>
