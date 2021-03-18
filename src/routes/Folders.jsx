@@ -9,13 +9,55 @@ const Table = styled(DataTable)`
         height: 20px !important;
         color: var(--poetry_brand);
     };
+    & .ethereum {
+        cursor: default;
+        background: -webkit-linear-gradient(74.5deg, grey, black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 14px;
+        &:hover {
+            font-size: 16px;
+            transition: font-size .2s;
+        };
+    };
+    & .harmony {
+        cursor: default;
+        background: -webkit-linear-gradient(74.5deg, #00aee9, #69fabd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 14px;
+        &:hover {
+            font-size: 16px;
+            transition: font-size .2s;
+        };
+    };
+    & .polkadot {
+        cursor: default;
+        background: -webkit-linear-gradient(74.5deg, #E5007A, black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 14px;
+        &:hover {
+            font-size: 16px;
+            transition: font-size .2s;
+        };
+    };
 `;
+
+const networkTemplate = (data) => Object.keys(data.networks).map(x => data.networks[x] ? <div className={x}>{x}</div> : '');
 
 const columns = [
     { field: 'name', header: 'Name', filterField: 'name', filter: true, filterPlaceholder: 'Search by folder' },
     { field: 'files.length', header: 'Files', filterField: 'fileCount', filter: true },
     { field: 'lastUpdated', header: 'Last Updated', filterField: 'fileCount', filter: true },
     { field: 'createdDate', header: 'Created', filterField: 'fileCount', filter: true },
+    { field: 'networks', header: 'Networks', filterField: 'fileCount', filter: true, body: networkTemplate }
 ];
 
 function Folders() {
