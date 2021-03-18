@@ -19,6 +19,16 @@ const defaultNetworkStyles = `
 `;
 
 const Table = styled(DataTable)`
+    & * ::-webkit-scrollbar {
+        width: 1px;
+    };
+    & * ::-webkit-scrollbar-track {
+        background: white;
+    };
+    & * ::-webkit-scrollbar-thumb {
+        background: var(--poetry_brand);
+        border: 1px solid var(--poetry_brand);
+    };
     & > * input {
         height: 20px !important;
         color: var(--poetry_brand);
@@ -40,17 +50,17 @@ const Table = styled(DataTable)`
 const networkTemplate = (data) => Object.keys(data.networks).map(x => data.networks[x] ? <div className={x}>{x}</div> : '');
 
 const columns = [
-    { field: 'name', header: 'Name', filterField: 'name', filter: true, filterPlaceholder: 'Search by folder' },
-    { field: 'files.length', header: 'Files', filterField: 'fileCount', filter: true },
-    { field: 'lastUpdated', header: 'Last Updated', filterField: 'fileCount', filter: true },
-    { field: 'createdDate', header: 'Created', filterField: 'fileCount', filter: true },
+    { field: 'name', header: 'Name', filterField: 'name', filter: true, filterPlaceholder: 'Search by folder', sortable: true },
+    { field: 'files.length', header: 'Files', filterField: 'fileCount', filter: true, sortable: true },
+    { field: 'lastUpdated', header: 'Last Updated', filterField: 'fileCount', filter: true, sortable: true },
+    { field: 'createdDate', header: 'Created', filterField: 'fileCount', filter: true, sortable: true },
     { field: 'networks', header: 'Networks', filterField: 'fileCount', filter: true, body: networkTemplate }
 ];
 
 function Folders() {
     const { folders } = useContext(LayoutContext);
     return(
-        <Table value={folders} emptyMessage='No folders found' className='p-datatable-sm' scrollable scrollHeight="68vh">
+        <Table value={folders} emptyMessage='No folders found' className='p-datatable-sm' scrollable scrollHeight="68vh" removableSort>
             {
                 columns.map(column => <Column {...column} />)
             }
