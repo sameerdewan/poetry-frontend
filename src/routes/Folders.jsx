@@ -4,49 +4,36 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { LayoutContext } from '../components/Layout';
 
+const defaultNetworkStyles = `
+    cursor: default;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 14px;
+    height: 16px;
+    &:hover {
+        font-size: 16px;
+        transition: font-size .2s;
+    };
+`;
+
 const Table = styled(DataTable)`
     & > * input {
         height: 20px !important;
         color: var(--poetry_brand);
     };
     & .ethereum {
-        cursor: default;
         background: -webkit-linear-gradient(74.5deg, grey, black);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-transform: capitalize;
-        font-weight: bold;
-        font-size: 14px;
-        &:hover {
-            font-size: 16px;
-            transition: font-size .2s;
-        };
+        ${defaultNetworkStyles}
     };
     & .harmony {
-        cursor: default;
         background: -webkit-linear-gradient(74.5deg, #00aee9, #69fabd);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-transform: capitalize;
-        font-weight: bold;
-        font-size: 14px;
-        &:hover {
-            font-size: 16px;
-            transition: font-size .2s;
-        };
+        ${defaultNetworkStyles}
     };
     & .polkadot {
-        cursor: default;
         background: -webkit-linear-gradient(74.5deg, #E5007A, black);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-transform: capitalize;
-        font-weight: bold;
-        font-size: 14px;
-        &:hover {
-            font-size: 16px;
-            transition: font-size .2s;
-        };
+        ${defaultNetworkStyles}
     };
 `;
 
