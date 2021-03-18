@@ -50,7 +50,7 @@ const columns = [
 function Folders() {
     const { folders } = useContext(LayoutContext);
     return(
-        <Table value={folders} emptyMessage='No folders found' className='p-datatable-sm'>
+        <Table value={folders} emptyMessage='No folders found' className='p-datatable-sm' scrollable scrollHeight="68vh">
             {
                 columns.map(column => <Column {...column} />)
             }

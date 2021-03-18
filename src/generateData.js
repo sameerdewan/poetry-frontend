@@ -358,14 +358,12 @@ function generateData(files = 0, folders = 0) {
         filesArr.push(generatedFile);
     }
     let logsArr = [];
-    fs.writeFileSync('./dummyData/files.json', JSON.stringify(filesArr, null, 2), 'utf8');
     for (let i = 0; i < filesArr.length; i++) {
         const file = filesArr[i];
         const log = generateLog(file);
         logsArr.push(log);
     }
     logsArr = logsArr.flat();
-    fs.writeFileSync('./dummyData/logs.json', JSON.stringify(logsArr, null, 2), 'utf8');
     const orderedEarliestDates = JSON.parse(JSON.stringify(logsArr)).sort((a, b) => {
         return Date.parse(a.date) > Date.parse(b.date) ? b : a;
     });
@@ -382,6 +380,8 @@ function generateData(files = 0, folders = 0) {
         foldersArr[i].lastUpdated = lastUpdated;
     }
     fs.writeFileSync('./dummyData/folders.json', JSON.stringify(foldersArr, null, 2), 'utf8');
+    fs.writeFileSync('./dummyData/files.json', JSON.stringify(filesArr, null, 2), 'utf8');
+    fs.writeFileSync('./dummyData/logs.json', JSON.stringify(logsArr, null, 2), 'utf8');
 }
 
 generateUsers(args.u);
