@@ -12,6 +12,7 @@ import { Badge } from 'primereact/badge';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import logoImage from '../images/poetry-white.svg';
 import { getFolders } from '../services/poetry-system';
+import CreateFolder from '../components/CreateFolder';
 
 const createFoldersTreeData = (folders = []) => {
     const root = [];
@@ -152,6 +153,7 @@ function Layout({ children}) {
                 <Pipeline />
                 <Members members={['SE', 'AE', 'ND', 'TP', 'NS']}/>
             </BottomPanel>
+            <CreateFolder />
         </React.Fragment>
     );
 }

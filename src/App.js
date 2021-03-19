@@ -46,6 +46,7 @@ function App() {
               <Route exact path='/dashboard/projects/:projectId' children={<div>main</div>} />
               <Route exact path='/dashboard/projects/:projectId/folders' render={props => <Folders {...props} />} />
               <Route exact path='/dashboard/projects/:projectId/folders/:folderName' render={props => <Folder {...props} />} />
+              <Route exact path='/dashboard/projects/:projectId/folders/:folderName/:fileName' render={props => <div>test</div>} />
             </Layout>
           </Switch> :
           <React.Fragment />
