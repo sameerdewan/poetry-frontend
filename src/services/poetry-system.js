@@ -18,10 +18,8 @@ export const validate = async ({ validationCode }) => {
 
 export const getFolders = async () => {
     return new Promise(resolve => {
-        setTimeout(() => {
-            const folders = require('../dummyData/folders.json');
-            resolve(folders);
-        }, 2000);
+        const folders = require('../dummyData/folders.json');
+        resolve(folders);
     });
 };
 
@@ -29,9 +27,7 @@ export const getFolderFiles = async (folderId) => {
     const allFiles = require('../dummyData/files.json');
     const files = allFiles.filter(x => x.folder === folderId);
     return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(files);
-        }, 2000);
+        resolve(files);
     });
 };
  

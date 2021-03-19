@@ -95,7 +95,7 @@ function Folder() {
     const tableProps = {
         value: files,
         className: 'p-datatable-sm p-datatable-striped',
-        emptyMessage: 'No folders found',
+        emptyMessage: 'No files found',
         scrollable: true,
         scrollHeight: '61vh', 
         removableSort: true,
