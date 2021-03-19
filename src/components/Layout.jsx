@@ -88,8 +88,10 @@ function Layout({ children}) {
     const dummyTabs = [
         { header: 'Folders', data: createFoldersTreeData(folders) },
         { header: 'Files', data },
+        { header: 'Tags', data },
         { header: 'Networks', data },
         { header: 'Logs', data },
+        { header: 'Archive', data },
         { header: 'API', data },
         { header: 'Subscription', data },
         { header: 'Settings', data },

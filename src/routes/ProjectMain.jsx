@@ -180,7 +180,7 @@ function ProjectMain() {
                 <RepoCard title=' repo1'>test</RepoCard>
             </RepoGrid>
             <br />
-            <span className='repogrid-header'><b>48</b> compositions in the last year</span>
+            <span className='repogrid-header'><b>4881</b> compositions in the last year</span>
             <HeatmapContainer>
                 <CalendarHeatmap 
                     startDate={new Date('2015-04-01')}
