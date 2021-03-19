@@ -4,7 +4,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
 import { LayoutContext } from '../components/Layout';
-import { useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { getFolderFiles } from '../services/poetry-system';
 
 const Table = styled(DataTable)`
@@ -75,6 +75,8 @@ const columns = [
 
 function Folder() {
     const { folders } = useContext(LayoutContext);
+    const history = useHistory();
+    const { pathname } = useLocation();
     const { folderName } = useParams();
     const [folder, setFolder] = useState({});
     const [files, setFiles] = useState([]);
@@ -104,7 +106,8 @@ function Folder() {
         currentPageReportTemplate: 'Showing {first} to {last} of {totalRecords}',
         rows: 20,
         rowsPerPageOptions: [20,40,80, 100],
-        selectionMode: 'single'
+        selectionMode: 'single',
+        onSelectionChange: ({ value: { fileName } }) => history.push(`${pathname}/${fileName}`)
     };
     return (
         <Table {...tableProps}>
