@@ -83,8 +83,10 @@ const RepoGrid = styled.section`
     margin-top: 20px;
     transition: .5s all;
     cursor: pointer;
+    .p-card {
+        background: rgb(103,58,188, .1) !important;
+    };
     .p-card: hover {
-        background: rgb(103,58,188, .2) !important;
         & .p-card-title:before {
             content: '\\e964';
             font-family: 'primeicons';
