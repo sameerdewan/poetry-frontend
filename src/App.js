@@ -10,6 +10,7 @@ import Pricing from './routes/Pricing';
 import Registered from './routes/Registered';
 import Validated from './routes/Validated';
 import Layout from './components/Layout';
+import ProjectMain from './routes/ProjectMain';
 import Folders from './routes/Folders';
 import Folder from './routes/Folder';
 import usePoetryProjectId from './hooks/usePoetryProjectId';
@@ -43,7 +44,7 @@ function App() {
             <Route exact path ='/dashboard/projects' children={<div>all projects</div>} />
             <Layout>
               <Route path='/dashboard/projects/:projectId' children={<PoetryId />} />
-              <Route exact path='/dashboard/projects/:projectId' children={<div>main</div>} />
+              <Route exact path='/dashboard/projects/:projectId' render={props => <ProjectMain />} />
               <Route exact path='/dashboard/projects/:projectId/folders' render={props => <Folders {...props} />} />
               <Route exact path='/dashboard/projects/:projectId/folders/:folderName' render={props => <Folder {...props} />} />
               <Route exact path='/dashboard/projects/:projectId/folders/:folderName/:fileName' render={props => <div>test</div>} />
