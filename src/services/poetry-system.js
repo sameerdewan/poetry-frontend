@@ -24,4 +24,14 @@ export const getFolders = async () => {
         }, 2000);
     });
 };
+
+export const getFolderFiles = async (folderId) => {
+    const allFiles = require('../dummyData/files.json');
+    const files = allFiles.filter(x => x.folder === folderId);
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(files);
+        }, 2000);
+    });
+};
  

@@ -15,10 +15,11 @@ import { getFolders } from '../services/poetry-system';
 
 const createFoldersTreeData = (folders = []) => {
     const root = [];
+    root.push({ key: 'root', label: 'View all', icon: 'pi pi-fw pi-eye' });
     for (let i = 0; i < folders.length; i++) {
         const folderData = folders[i];
         const folder = {};
-        folder.key = i;
+        folder.key = `${i}`;
         folder.label = folderData.name;
         folder.data = folderData.name;
         folder.icon = 'pi pi-fw pi-folder';
@@ -47,14 +48,29 @@ function Layout({ children}) {
     const history = useHistory();
 
     const onTabChange = useCallback(
-        ({ index, originalEvent }) => {
+        ({ index }) => {
             setActiveIndex(index);
-            const { innerText } = originalEvent.target;
-            if (innerText === 'Folders') {
-                return history.push(`/dashboard/projects/${projectId}/folders`);
-            }
         },
         [projectId]
+    );
+
+    const onTreeNodeClick = useCallback(
+        ({ value }) => {
+            const isRoot = value === 'root';
+            if (isRoot) {
+                return history.push(`/dashboard/projects/${window.poetryProjectId}/folders`);
+            }
+            const isFile = value.includes('-');
+            if (isFile) {
+                const [folderIndex, fileIndex] = value.split('-');
+                const folder = folders[Number(folderIndex)];
+                const file = folder.files[Number(fileIndex)];
+                return history.push(`/dashboard/projects/${window.poetryProjectId}/folders/${folder.name}/${file.fileName}`);
+            }
+            const folder = folders[Number(value )];
+            return history.push(`/dashboard/projects/${window.poetryProjectId}/folders/${folder?.name}`);
+        },
+        [folders]
     );
 
     useEffect(() => {
@@ -110,11 +126,13 @@ function Layout({ children}) {
                                 <AccordionTab header={dT.header}>
                                     <Tree
                                         value={dT.data} 
-                                        selectionMode="single"
+                                        selectionMode='single'
+                                        onSelectionChange={onTreeNodeClick}
                                     />
                                 </AccordionTab>
                             )
                         }
+                        
                     </Accordion>
                 </SidePanel>
                 <Main>
