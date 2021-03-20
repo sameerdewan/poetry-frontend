@@ -55,7 +55,7 @@ function Layout({ children}) {
         [projectId]
     );
 
-    const onTreeNodeClick = useCallback(
+    const onTreeNodeClick_Folders = useCallback(
         ({ value }) => {
             const isRoot = value === 'root';
             if (isRoot) {
@@ -86,10 +86,9 @@ function Layout({ children}) {
     }, []);
 
     const dummyTabs = [
-        { header: 'Folders', data: createFoldersTreeData(folders) },
+        { header: 'Folders', data: createFoldersTreeData(folders), onTreeNodeClick: onTreeNodeClick_Folders },
         { header: 'Files', data },
         { header: 'Tags', data },
-        { header: 'Networks', data },
         { header: 'Logs', data },
         { header: 'Archive', data },
         { header: 'API', data },
@@ -130,7 +129,7 @@ function Layout({ children}) {
                                     <Tree
                                         value={dT.data} 
                                         selectionMode='single'
-                                        onSelectionChange={onTreeNodeClick}
+                                        onSelectionChange={dT.onTreeNodeClick}
                                     />
                                 </AccordionTab>
                             )

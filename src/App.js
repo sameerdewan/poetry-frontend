@@ -14,6 +14,7 @@ import ProjectMain from './routes/ProjectMain';
 import Folders from './routes/Folders';
 import Folder from './routes/Folder';
 import usePoetryProjectId from './hooks/usePoetryProjectId';
+import File from './routes/File';
 
 function PoetryId() {
   usePoetryProjectId();
@@ -47,7 +48,7 @@ function App() {
               <Route exact path='/dashboard/projects/:projectId' render={props => <ProjectMain />} />
               <Route exact path='/dashboard/projects/:projectId/folders' render={props => <Folders {...props} />} />
               <Route exact path='/dashboard/projects/:projectId/folders/:folderName' render={props => <Folder {...props} />} />
-              <Route exact path='/dashboard/projects/:projectId/folders/:folderName/:fileName' render={props => <div>test</div>} />
+              <Route exact path='/dashboard/projects/:projectId/folders/:folderName/:fileName' render={props => <File {...props} />} />
             </Layout>
           </Switch> :
           <React.Fragment />
