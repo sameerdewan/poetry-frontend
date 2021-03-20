@@ -163,6 +163,10 @@ export default Layout;
 
 
 const SidePanel = styled.section`
+    background: rgb(103,58,181, .1) !important;
+    & .p-accordion-header-link {
+        background: transparent !important;
+    };
     overflow-y: scroll;
     ::-webkit-scrollbar {
         width: 1px;

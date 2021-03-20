@@ -46,42 +46,6 @@ const PoetrySteps = styled(Steps)`
     ${props => colorConverter(props.activeIndex)}
 `;
 
-const DataContainer = styled.div`
-    width: 100%;
-    max-width: 1200px;
-    margin: auto auto;
-    max-height: 60vh;
-    display: flex;
-    justify-content: space-between;
-`;
-
-const FlexContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    justify-content: space-between;
-`;
-
-const SmallCard = styled(Card)`
-    margin: auto auto;
-    width: 90%;
-    min-height: 30vh;
-    max-height: 300px;
-    &:nth-of-type(1) {
-        background-color: #B4E5FC;
-    };
-    &:nth-of-type(2) {
-        background-color: rgb(103,58,181, .3);
-    };
-`;
-
-const TallCard = styled(Card)`
-    min-height: 62.2vh;
-    max-height: 600px;
-    width: 90%;
-    background-color: rgb(158,157,158, .3);
-`;
-
 function File() {
     const steps = [
         { label: 'In Queue' },
@@ -94,38 +58,6 @@ function File() {
             <Tabs>
                 <TabPanel header='Ethereum'>
                     <PoetrySteps model={steps} activeIndex={1}/>
-                    <DataContainer>
-                        <FlexContainer>
-                            <SmallCard header='Information'>
-                                name: cockroachCyan.bin
-                                <br/>
-                                hash: a1293u129dj3dj23d2dwefd24r
-                                <br/>
-                                date: 2020-12-23T22:37:56.959Z
-                                <br/>
-                                createdBy: API
-                                <br/>
-                                identifer: werwerwer134r234234
-                                <br/>
-                            </SmallCard>
-                            <br/>
-                            <SmallCard header='Blockchain Information'>
-                                name: cockroachCyan.bin
-                                <br/>
-                                hash: a1293u129dj3dj23d2dwefd24r
-                                <br/>
-                                date: 2020-12-23T22:37:56.959Z
-                                <br/>
-                                createdBy: API
-                                <br/>
-                                identifer: werwerwer134r234234
-                                <br/>
-                            </SmallCard>
-                        </FlexContainer>
-                        <TallCard header='Notes'>
-                            
-                        </TallCard>
-                    </DataContainer>
                 </TabPanel>
                 <TabPanel header='Harmony'>
                     <PoetrySteps model={steps} activeIndex={0}/>
